@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+django-rest-swagger = "*"
+django-debug-toolbar = "*"
+
+[packages]
+django = "*"
+django-rest-auth = "*"
+django-allauth = "*"
+
+[requires]
+python_version = "3.7"
+
+[scripts]
+server = "python manage.py runserver"
