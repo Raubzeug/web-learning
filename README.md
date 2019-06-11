@@ -1,10 +1,9 @@
 # Platform for web learning
 
-<li>
-http://127.0.0.1:8000/api/</li>
-<li>http://127.0.0.1:8000/api/lessons/</li>
-http://127.0.0.1:8000/api/lessons/<lesson_id>
-<li>http://127.0.0.1:8000/api/courses</li>
+<ul><li>host:port/api/</li>
+<li>host:port/api/lessons/</li>
+<li>host:port/api/lessons/<lesson_id></li>
+<li>host:port/api/courses</li>
 <li>http://127.0.0.1:8000/api/courses/<course_id></li>
 <li>http://127.0.0.1:8000/api/courses/<course_id>/enroll</li>
 <li>http://127.0.0.1:8000/api/users</li>
