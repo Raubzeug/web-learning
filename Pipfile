@@ -6,11 +6,15 @@ verify_ssl = true
 [dev-packages]
 django-rest-swagger = "*"
 django-debug-toolbar = "*"
+django-graphiql-debug-toolbar = "*"
 
 [packages]
 django = "*"
 django-rest-auth = "*"
 django-allauth = "*"
+graphene-django = "*"
+graphene = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.7"
