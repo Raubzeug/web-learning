@@ -1,10 +1,9 @@
 # Platform for web learning
 
-<h2>List of APIs:</h2>
-<ul><li>
+<li>
 http://127.0.0.1:8000/api/</li>
 <li>http://127.0.0.1:8000/api/lessons/</li>
-<li>http://127.0.0.1:8000/api/lessons/<lesson_id></li>
+http://127.0.0.1:8000/api/lessons/<lesson_id>
 <li>http://127.0.0.1:8000/api/courses</li>
 <li>http://127.0.0.1:8000/api/courses/<course_id></li>
 <li>http://127.0.0.1:8000/api/courses/<course_id>/enroll</li>
@@ -14,5 +13,5 @@ http://127.0.0.1:8000/api/</li>
 <li>http://127.0.0.1:8000/api/groups/<group_id></li>
 <li>http://127.0.0.1:8000/api/auth/registration</li>
 <li>http://127.0.0.1:8000/api/auth/login</li>
-<li>http://127.0.0.1:8000/api/auth/logout</li></ul>
+<li>http://127.0.0.1:8000/api/auth/logout</li>
 
