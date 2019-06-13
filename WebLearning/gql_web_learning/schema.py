@@ -1,6 +1,6 @@
 import graphene
 from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 from rest_framework.authtoken.models import Token
 from graphene_django.types import DjangoObjectType
 from courses_app.models import Course, Lesson
@@ -41,6 +41,23 @@ class CreateUser(graphene.Mutation):
         return CreateUser(user=user)
 
 
+class Login(graphene.Mutation):
+    class Arguments:
+        username = graphene.String(required=True)
+        password = graphene.String(required=True)
+
+    result = graphene.String()
+
+    def mutate(self, info, username, password):
+        user = authenticate(username=username, password=password)
+        if user.is_active:
+            token, created = Token.objects.get_or_create(user=user)
+            # login(info, user)
+            print(info.SESSION)
+            return Login(result=f'token: {token}')
+        return Login(result='Wrong credentials')
+
+
 class Enroll(graphene.Mutation):
     class Arguments:
         course_id = graphene.Int(required=True)
@@ -60,6 +77,7 @@ class Enroll(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
     enroll_course = Enroll.Field()
+    login = Login.Field()
 
 
 class Query:
