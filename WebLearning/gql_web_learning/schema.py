@@ -50,9 +50,8 @@ class Login(graphene.Mutation):
 
     def mutate(self, info, username, password):
         user = authenticate(username=username, password=password)
-        if user.is_active:
+        if user and user.is_active:
             token, created = Token.objects.get_or_create(user=user)
-            # login(info, user)
             print(info.SESSION)
             return Login(result=f'token: {token}')
         return Login(result='Wrong credentials')
