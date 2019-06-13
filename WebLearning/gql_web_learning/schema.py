@@ -66,7 +66,7 @@ class Enroll(graphene.Mutation):
     def mutate(self, info, course_id):
         course = Course.objects.get(pk=course_id)
         user = info.context.user
-        if not user.is_active:
+        if not user or not user.is_active:
             return Enroll(result='enroll failed')
         if course is not None and user is not None and user.is_active:
             course.pupils.add(user)
