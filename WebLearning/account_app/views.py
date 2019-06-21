@@ -1,5 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User, Group
+# from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
+from account_app.models import CustomUser as User
 from rest_framework import viewsets, generics, status
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
@@ -7,7 +9,6 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser
 
 from .serializers import UserSerializer, GroupSerializer, RegistrationSerializer, LoginSerializer, LogoutSerializer
-
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)
@@ -39,12 +40,15 @@ class LoginView(APIView):
         username = request.data.get('username')
         password = request.data.get('password')
         user = authenticate(username=username, password=password)
+        if not user:
+            return Response({'error': 'wrong credentials'}, status=status.HTTP_400_BAD_REQUEST)
+        if not user.email_confirmed:
+            return Response({'error': 'You must confirm your email'}, status=status.HTTP_400_BAD_REQUEST)
         if user.is_active:
             token, created = Token.objects.get_or_create(user=user)
             login(request, user)
             return Response({'token': user.auth_token.key})
-        else:
-            return Response({'error': 'wrong credentials'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'something goes wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LogoutView(APIView):
@@ -63,3 +67,13 @@ class LogoutView(APIView):
             logout(request)
             return Response('Logout successful', status=status.HTTP_200_OK)
         return Response('No action applied', status=status.HTTP_200_OK)
+
+
+class UserDetailsView(APIView):
+    def get(self, request):
+        request.auth
+        user = request.user
+        if not user or not user.id:
+            return Response({'message': 'you are not logged in'})
+        serializer = UserSerializer(user, context={'request': request})
+        return Response(serializer.data)

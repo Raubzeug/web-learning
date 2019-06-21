@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 from .models import Lesson, Course
-from .serializers import LessonSerializer, CourseSerializer
+from .serializers import LessonSerializer, BasicCourseSerializer, FullCourseSerializer
 
 
 class LessonViewSet(viewsets.ModelViewSet):
@@ -35,8 +35,13 @@ class LessonViewSet(viewsets.ModelViewSet):
 
 
 class CourseViewSet(viewsets.ModelViewSet):
+
     queryset = Course.objects.all()
-    serializer_class = CourseSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_superuser:
+            return FullCourseSerializer
+        return BasicCourseSerializer
 
     def create(self, request, *args, **kwargs):
         permission_class = IsAdminUser

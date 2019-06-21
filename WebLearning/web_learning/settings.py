@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
-    'graphiql_debug_toolbar',
+    # 'graphiql_debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
     'courses_app.apps.CoursesAppConfig',
@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'gql_web_learning.apps.GqlWebLearningConfig',
 
 ]
+
+AUTH_USER_MODEL = 'account_app.CustomUser'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -61,8 +63,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'graphiql_debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'graphiql_debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'web_learning.urls'

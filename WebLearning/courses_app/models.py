@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from account_app.models import CustomUser as User
 from django.db import models
 
 
