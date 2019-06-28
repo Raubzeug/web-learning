@@ -7,6 +7,8 @@ verify_ssl = true
 django-rest-swagger = "*"
 django-debug-toolbar = "*"
 django-graphiql-debug-toolbar = "*"
+django = "*"
+faker = "*"
 
 [packages]
 django = "*"

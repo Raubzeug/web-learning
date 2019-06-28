@@ -1,6 +1,8 @@
 **playground.html
 **playground.css
 
+**/migrations
+!__init__.py
 
 # IDE settings
 .idea
