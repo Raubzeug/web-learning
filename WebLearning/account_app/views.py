@@ -12,13 +12,13 @@ from .serializers import UserSerializer, GroupSerializer, RegistrationSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = User.objects.all().order_by('-date_joined').prefetch_related('courses', 'groups')
     serializer_class = UserSerializer
 
 
 class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)
-    queryset = Group.objects.all()
+    queryset = Group.objects.all().prefetch_related('user_set')
     serializer_class = GroupSerializer
 
 

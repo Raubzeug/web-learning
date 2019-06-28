@@ -8,22 +8,21 @@ from courses_app.models import Course
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name="courses_app:group-detail")
-
+    user_set = serializers.HyperlinkedIdentityField(view_name="courses_app:customuser-detail", many=True)
     class Meta:
         model = Group
-        fields = ('url', 'name')
+        fields = ('url', 'name', 'user_set')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name="courses_app:customuser-detail")
-    groups = serializers.HyperlinkedRelatedField(view_name="courses_app:group-detail",
-                                                 queryset=Group.objects.all(), many=True)
+    groups = serializers.HyperlinkedIdentityField(view_name="courses_app:group-detail", many=True)
     courses = serializers.HyperlinkedRelatedField(view_name="courses_app:course-detail",
                                                   queryset=Course.objects.all(), many=True)
 
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups', 'courses')
+        fields = ('url', 'groups', 'username', 'email', 'courses')
 
 
 class RegistrationSerializer(serializers.Serializer):

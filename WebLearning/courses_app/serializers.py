@@ -17,12 +17,15 @@ class LessonSerializer(serializers.HyperlinkedModelSerializer):
 
 class BasicCourseSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name="courses_app:course-detail")
+
     lessons = serializers.HyperlinkedRelatedField(view_name="courses_app:lesson-detail",
-                                                 queryset=Lesson.objects.all(), many=True)
+                                                 queryset=Lesson.objects.all().select_related('course'), many=True)
+
+    language = serializers.StringRelatedField()
 
     class Meta:
         model = Course
-        fields = ('url', 'id', 'title', 'description', 'tutor', 'lessons')
+        fields = ('url', 'id', 'title', 'description', 'language', 'tutor', 'lessons')
 
 
 class FullCourseSerializer(BasicCourseSerializer):
@@ -31,4 +34,4 @@ class FullCourseSerializer(BasicCourseSerializer):
 
     class Meta:
         model = Course
-        fields = ('url', 'id', 'title', 'description', 'tutor', 'lessons', 'pupils')
+        fields = ('url', 'id', 'title', 'description', 'language', 'tutor', 'lessons', 'pupils')

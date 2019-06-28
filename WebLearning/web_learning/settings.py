@@ -38,13 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'debug_toolbar',
     # 'graphiql_debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
+    'graphene_django',
+
     'courses_app.apps.CoursesAppConfig',
     'account_app.apps.AccountAppConfig',
-    'graphene_django',
     'gql_web_learning.apps.GqlWebLearningConfig',
 
 ]

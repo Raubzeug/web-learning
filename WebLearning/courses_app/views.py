@@ -9,7 +9,7 @@ from .serializers import LessonSerializer, BasicCourseSerializer, FullCourseSeri
 
 
 class LessonViewSet(viewsets.ModelViewSet):
-    queryset = Lesson.objects.all()
+    queryset = Lesson.objects.all().select_related('course')
     serializer_class = LessonSerializer
 
     def create(self, request, *args, **kwargs):
@@ -36,7 +36,7 @@ class LessonViewSet(viewsets.ModelViewSet):
 
 class CourseViewSet(viewsets.ModelViewSet):
 
-    queryset = Course.objects.all()
+    queryset = Course.objects.all().prefetch_related('pupils', 'lessons').select_related('language')
 
     def get_serializer_class(self):
         if self.request.user.is_superuser:
