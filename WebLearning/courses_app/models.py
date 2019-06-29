@@ -2,6 +2,7 @@
 from account_app.models import CustomUser as User
 from django.db import models
 
+
 class Language(models.Model):
     name = models.CharField(max_length=50)
 
@@ -15,7 +16,7 @@ class Language(models.Model):
 
 class Course(models.Model):
     title = models.CharField(max_length=100)
-    language = models.ForeignKey(Language, on_delete=models, related_name='courses',
+    language = models.ForeignKey(Language, on_delete=models.SET_NULL, related_name='courses',
                                  default=None, blank=True, null=True)
     description = models.TextField()
     tutor = models.CharField(max_length=100)
