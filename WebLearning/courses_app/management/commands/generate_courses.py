@@ -26,6 +26,7 @@ class Command(BaseCommand):
             )
             course.pupils.add(
                 *random.sample(pupils, random.randint(0, len(pupils)))
+
             )
 
     def handle(self, *args, **kwargs):
