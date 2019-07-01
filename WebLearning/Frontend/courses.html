@@ -6,7 +6,8 @@
     <meta name="Keywords" content="learning, course, python, online, обучение, пайтон, программирование">
     <meta name="Description" content="Сайт боевой лисички для  для онлайн обучения программированию">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="frontend2.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="courses.css">
     <title>Course list - Vixen online learning</title>
 </head>
 <header>
@@ -23,7 +24,7 @@
             <a class='navigation__button' href="/home/">ABOUT US</a>
             <a class='navigation__button button-active' href="/courses/">COURSES</a>
             <a class='navigation__button' href="/partners/">TUTORS</a>
-            <a class='navigation__button' href="/contact/">CONTACT</a>
+            <a class='navigation__button' href="/contact/">CONTACTS</a>
         </div>
         <div class="header__search">
             <form action="#" method="get">
@@ -35,96 +36,45 @@
 
     <section class="content">
         <div class="content-left-wrapper">
-            <div class="content__block">
+            <div class="content__block_courses">
                 <div class="content__header_courses">
                     <span>Здесь вы можете ознакомиться с полным перечнем наших курсов и выбрать обучение себе по душе</span>
                 </div>
                 <div class="courses">
 
+                    <template id = 'course-template'>
+                        <div class = 'course_wrapper'>
+                            <article class="course">
+                                <h1 class="course-heading"></h1>
+                                <div class="course-meta">
+                                  <div class="course-category">
+                                    <span class="course-icon course-tag">Категория: </span>
+                                    <span></span>
+                                  </div>
+                                </div>
+                                <div class="course-content">
+                                  <figure class="course-figure">
+                                    <img class="course-img" src="" alt="">
+                                    <figcaption>
+                                      <p></p>
+                                    </figcaption>
+                                  </figure>
 
-                    <article class="course">
+                                  <a class="course-info-button" href="" title="Посмотреть лекции курса">
+                                      Посмотреть лекции курса
+                                  </a>
 
-                        <h1 class="course-heading">Web разработка на Python</h1>
-                        <div class="course-meta">
-                          <div class="course-category">
-                            <span class="course-icon course-tag">Категория: </span>
-                            <span>Python</span>
-                          </div>
+                                </div>
+                            </article>
+                            <div class = 'lections_list hidden'>
+                                <ul><li><h1>список лекций</h1></li>
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="course-content">
-                          <figure class="course-figure">
-                            <img class="course-img" src="images/python-1.png" alt="Python-1">
-                            <figcaption>
-                              <p>Много всего интересного про язык программирования Python</p>
-                            </figcaption>
-                          </figure>
-                          <a class="course-info-button" href="/courses/python-1.html">Информация о курсе</a>
-                        </div>
-
-                    </article>
-
-                    <article class="course">
-                        <h1 class="course-heading">Верстка с помощью CSS</h1>
-                        <div class="course-meta">
-                          <div class="course-category">
-                            <span class="course-icon course-tag">Категория: </span>
-                            <span>CSS</span>
-                          </div>
-                        </div>
-                        <div class="course-content">
-                          <figure class="course-figure">
-                            <img class="course-img" src="images/css-1.png" alt="CSS-1">
-                            <figcaption>
-                              <p>Всякая разная информация о верстке с помощью CSS и еще всякая
-                              разная информация и еще и еще и еще чтобы проверить, как верстается карточка курса.</p>
-                            </figcaption>
-                          </figure>
-                          <a class="course-info-button" href="/courses/python-1.html">Информация о курсе</a>
-                        </div>
-                    </article>
-
-                    <article class="course">
-                        <h1 class="course-heading">JavaScript для продвинутых</h1>
-                        <div class="course-meta">
-                          <div class="course-category">
-                            <span class="course-icon course-tag">Категория: </span>
-                            <span>JavaScript</span>
-                          </div>
-                        </div>
-                        <div class="course-content">
-                          <figure class="course-figure">
-                            <img class="course-img" src="images/js.png" alt="JS-1">
-                            <figcaption>
-                              <p>После прохождения этого курса вы сможете вдохнуть жизнь и движение в свои проекты.</p>
-                            </figcaption>
-                          </figure>
-                          <a class="course-info-button" href="/courses/python-1.html">Информация о курсе</a>
-                        </div>
-                    </article>
-
-                    <article class="course">
-                        <h1 class="course-heading">Софт-скиллз для разработчиков</h1>
-                        <div class="course-meta">
-                          <div class="course-category">
-                            <span class="course-icon course-tag">Категория: </span>
-                            <span>Разное</span>
-                          </div>
-                        </div>
-                        <div class="course-content">
-                          <figure class="course-figure">
-                            <img class="course-img" src="images/foxy.png" alt="Softskills">
-                            <figcaption>
-                              <p>Ты погружен в мир технологий и совершенно не умеешь общаться с
-                              живыми людьми? Лисичка тебе поможет!</p>
-                            </figcaption>
-                          </figure>
-
-                          <a class="course-info-button" href="/courses/softskills.html" title="Информация о курсе">
-                              Информация о курсе
-                          </a>
-
-                        </div>
-                    </article>
+                    </template>
 
                 </div>
             </div>
@@ -138,6 +88,7 @@
         </div>
     </div>
 </div>
+<script src="script.js"></script>
 </body>
 
 </html>
