@@ -31,7 +31,7 @@ var courseTemp = coursesListField.querySelector('#course-template').content
 var newCourseTemp = courseTemp.querySelector('.course_wrapper')
 var courses = coursesListField.children
 
-addCourseHandler = (course) => {
+var addCourseHandler = (course) => {
     var infoButton = course.querySelector('.course-info-button')
     var lectionList = course.querySelector('.lections_list')
     var flag = false
