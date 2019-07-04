@@ -23,19 +23,26 @@ body {
 }
 
 .header__navigation {
+    position: relative;
     flex-grow: 1;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: flex-end;
+    list-style: none;
 }
 
 .navigation__button {
+    position: relative;
     flex-grow: 1;
     padding: 10px;
-    height=300px;
     text-align: center;
     background-color: rgba(144, 184, 209, 1);
+    color: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navigation__button__link {
     text-decoration: none;
     color: #fff;
 }
@@ -46,9 +53,28 @@ body {
 }
 
 .navigation__button:hover {
-    	color: #fff;
-    	background: rgba(8, 132, 209, 1);
-    	transition: all .3s linear;
+    color: #fff;
+    background: rgba(8, 132, 209, 1);
+    transition: all .3s linear;
+}
+
+.navigation__sub-menu {
+    position: absolute;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
+    top: 42px;
+    left: 0px;
+    list-style: none;
+    z-index: 10;
+    display: none;
+}
+
+.navigation__button:hover .navigation__sub-menu {
+  display: block;
 }
 
 .header__logo {

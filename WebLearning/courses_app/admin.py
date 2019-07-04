@@ -16,7 +16,11 @@ class CourseAdmin(admin.ModelAdmin):
         prefetch_qs_pupils = CustomUser.objects.only('username')
         prefetch_pupils = Prefetch('pupils', queryset=prefetch_qs_pupils)
 
-        qs = qs.prefetch_related('lessons').prefetch_related(prefetch_pupils).select_related('language')
+        # prefetch_qs_lessons = Lesson.objects.select_related('course')
+        prefetch_qs_lessons = Lesson.objects.only('title')
+        prefetch_lessons = Prefetch('lessons', queryset=prefetch_qs_lessons)
+
+        qs = qs.prefetch_related(prefetch_lessons, prefetch_pupils).select_related('language')
         return qs
 
     def get_pupils_str(self, obj):
@@ -24,6 +28,7 @@ class CourseAdmin(admin.ModelAdmin):
     get_pupils_str.short_description = 'Pupils'
 
     def get_lessons_str(self, obj):
+        # return ', '.join(obj.lessons.values_list('title', flat=True))
         return ', '.join([l.title for l in obj.lessons.all()])
     get_lessons_str.short_description = 'Lessons'
 

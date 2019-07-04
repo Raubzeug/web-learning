@@ -1,5 +1,4 @@
 .content__header_courses {
-
     height: auto;
     padding: 50px 10px;
     width: 100%;
@@ -17,11 +16,19 @@
 
 .course_wrapper {
     display: flex;
-    flex-direction: column;
 }
 
 .course_wrapper_full {
     width: 100%;
+    background: linear-gradient(45deg, white, rgb(191, 213, 227));
+}
+
+.course_additional_info {
+    flex-grow: 1;
+    text-align: right;
+    align-self: center;
+    border-left: 1px solid white;
+    padding: 10px;
 }
 
 .course {
@@ -37,11 +44,6 @@
 .course_hover {
     background-color: rgb(191, 213, 227);
     transition: all .9s linear;
-}
-
-.lections_list {
-    flex-grow: 1;
-    padding: 10px;
 }
 
 .hidden {

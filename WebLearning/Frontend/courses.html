@@ -19,13 +19,22 @@
         <a class="header__logo" href="#" title="На главную">
             <img src="images/logo.png">
         </a>
-        <div class="header__navigation">
-            <a class='navigation__button ' href="/home/">HOME</a>
-            <a class='navigation__button' href="/home/">ABOUT US</a>
-            <a class='navigation__button button-active' href="/courses/">COURSES</a>
-            <a class='navigation__button' href="/partners/">TUTORS</a>
-            <a class='navigation__button' href="/contact/">CONTACTS</a>
-        </div>
+
+            <ul class="header__navigation">
+                <li class='navigation__button'><a class="navigation__button__link" href="/home/">HOME</a></li>
+                <li class='navigation__button'><a class="navigation__button__link" href="/home/">ABOUT US</a></li>
+                <li class='navigation__button button-active'>
+                    <a class="navigation__button__link" href="/courses/">COURSES</a>
+                    <ul class="navigation__sub-menu">
+                        <li class='navigation__button'>
+                            <a class="navigation__button__link" href="#">SCHEDULE</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class='navigation__button'><a class="navigation__button__link" href="/partners/">TUTORS</a></li>
+                <li class='navigation__button'><a class="navigation__button__link" href="/contact/">CONTACTS</a></li>
+            </ul>
+
         <div class="header__search">
             <form action="#" method="get">
                 <input class="header__search__input" type="text" name="q" placeholder="Search">
@@ -60,18 +69,19 @@
                                     </figcaption>
                                   </figure>
 
-                                  <a class="course-info-button" href="" title="Посмотреть лекции курса">
-                                      Посмотреть лекции курса
+                                  <a class="course-info-button" href="" title="Посмотреть информацию о курсе">
+                                      Посмотреть информацию о курсе
                                   </a>
 
                                 </div>
                             </article>
-                            <div class = 'lections_list hidden'>
-                                <ul><li><h1>список лекций</h1></li>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                </ul>
+                            <div class = 'course_additional_info hidden'>
+                                <h1> Информация о курсе</h1>
+                                <p>Подробное описание курса</p>
+                                <h1>Информация о преподавателе</h1>
+                                <p>Фото, достижения</p>
+
+                                </table>
                             </div>
                         </div>
                     </template>

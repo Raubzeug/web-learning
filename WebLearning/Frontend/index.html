@@ -19,13 +19,20 @@
         <a class="header__logo" href="#" title="На главную">
             <img src="images/logo.png">
         </a>
-        <div class="header__navigation">
-            <a class='navigation__button button-active' href="/home/">HOME</a>
-            <a class='navigation__button' href="/home/">ABOUT US</a>
-            <a class='navigation__button' href="/courses/">COURSES</a>
-            <a class='navigation__button' href="/partners/">TUTORS</a>
-            <a class='navigation__button' href="/contact/">CONTACTS</a>
-        </div>
+            <ul class="header__navigation">
+                <li class='navigation__button button-active'><a class="navigation__button__link" href="/home/">HOME</a></li>
+                <li class='navigation__button'><a class="navigation__button__link" href="/home/">ABOUT US</a></li>
+                <li class='navigation__button'>
+                    <a class="navigation__button__link" href="/courses/">COURSES</a>
+                    <ul class="navigation__sub-menu">
+                        <li class='navigation__button'>
+                            <a class="navigation__button__link" href="#">SCHEDULE</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class='navigation__button'><a class="navigation__button__link" href="/partners/">TUTORS</a></li>
+                <li class='navigation__button'><a class="navigation__button__link" href="/contact/">CONTACTS</a></li>
+            </ul>
         <div class="header__search">
             <form action="#" method="get">
                 <input class="header__search__input" type="text" name="q" placeholder="Search">
