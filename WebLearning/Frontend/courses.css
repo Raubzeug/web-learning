@@ -5,7 +5,7 @@
     flex-grow: 1;
     font-size: 28px;
     font-weight: bold;
-    background: linear-gradient(45deg, #cdb8e3, rgb(191, 213, 227));
+    background: linear-gradient(45deg, #cdb8e3, #bfd5e3);
 }
 
 .content__block_courses {
@@ -20,7 +20,7 @@
 
 .course_wrapper_full {
     width: 100%;
-    background: linear-gradient(45deg, white, rgb(191, 213, 227));
+    background: linear-gradient(45deg, white, #bfd5e3);
 }
 
 .course_additional_info {
@@ -42,8 +42,8 @@
 }
 
 .course_hover {
-    background-color: rgb(191, 213, 227);
-    transition: all .9s linear;
+    background-color: #bfd5e3;
+    transition: all .4s linear;
 }
 
 .hidden {

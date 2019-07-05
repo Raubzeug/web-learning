@@ -13,7 +13,7 @@ from courses_app.models import Course
 
 class Command(BaseCommand):
 
-    def generate(self, amount=50):
+    def generate(self, amount=10):
         fake = Faker()
         groups = list(Group.objects.values_list('id',flat=True))
         courses = list(Course.objects.values_list('id', flat=True))

@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
-# from django.contrib.auth.models import User, Group
 from django.contrib.auth.models import Group
+from django.http import Http404, HttpResponse
+from django.shortcuts import redirect
+
 from account_app.models import CustomUser as User
 from rest_framework import viewsets, generics, status
 from rest_framework.authtoken.models import Token
@@ -9,6 +11,21 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser
 
 from .serializers import UserSerializer, GroupSerializer, RegistrationSerializer, LoginSerializer, LogoutSerializer
+
+
+def verify(request, uuid):
+    try:
+        user = User.objects.get(verification_uuid=uuid, email_confirmed=False)
+    except User.DoesNotExist:
+        raise Http404("User does not exist or is already verified")
+
+    user.email_confirmed = True
+    user.save()
+
+    return redirect('verification_successfull')
+
+def verification_successfull(request):
+    return HttpResponse("<html><body>You confirmed your email successfully.</body></html>")
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)

@@ -68,7 +68,7 @@ for (var i = 0; i < coursesData.length; i++) {
     var courseName = newCourse.querySelector('.course-heading')
     var courseLang = newCourse.querySelector('.course-category span')
     var courseImg = newCourse.querySelector('.course-img')
-    var courseDesc = newCourse.querySelector('.course-figure p')
+    var courseDesc = newCourse.querySelector('.course-figure figcaption')
     var courseLink = newCourse.querySelector('.course-content a')
 
     newCourse.id = coursesData[i].id

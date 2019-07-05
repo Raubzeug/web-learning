@@ -58,6 +58,7 @@ class RegistrationSerializer(serializers.Serializer):
         user.set_password(validated_data['password'])
         user.save()
         Token.objects.create(user=user)
+
         return user
 
 
