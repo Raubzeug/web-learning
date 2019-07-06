@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'graphene_django',
+    'django_rq',
 
     'courses_app.apps.CoursesAppConfig',
     'account_app.apps.AccountAppConfig',
@@ -162,7 +163,15 @@ REST_FRAMEWORK = {
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'killedandsaved@mail.ru'
+EMAIL_HOST_PASSWORD = 'PainLovePoetry'
 DEFAULT_FROM_EMAIL = 'Elena Makarova'
-DEFAULT_TO_EMAIL = ''
+DEFAULT_TO_EMAIL = 'killedandsaved@mail.ru'
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+    }
+}

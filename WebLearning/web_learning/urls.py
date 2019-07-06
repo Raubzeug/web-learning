@@ -11,6 +11,7 @@ urlpatterns = [
     path('api/', include('courses_app.urls')),
     path('api/auth/', include('account_app.urls')),
     path('graphql/', GraphQLView.as_view(graphiql=True, schema=schema)),
+    path('django-rq', include('django_rq.urls')),
 
 ]
 
