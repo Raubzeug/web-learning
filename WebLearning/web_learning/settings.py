@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'graphene_django',
-    'send_email.apps.SendEmailConfig',
 
     'courses_app.apps.CoursesAppConfig',
     'account_app.apps.AccountAppConfig',
