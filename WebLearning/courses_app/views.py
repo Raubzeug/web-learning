@@ -1,3 +1,5 @@
+from .tasks import send_mail_conf
+
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
@@ -70,5 +72,10 @@ class CourseViewSet(viewsets.ModelViewSet):
         course = Course.objects.get(pk=pk)
         if course is not None and user.is_active:
             course.pupils.add(user)
+            sender = 'killedandsaved@mail.ru'
+            reciever = user.email
+            subj = 'Enrolling course'
+            message = f'You succeslully enrolled course {course.title}'
+            send_mail_conf.delay(sender, reciever, subj, message)
             return Response(f'You\'ve succesfully enrolled the course {course}', status=status.HTTP_200_OK)
         return Response('No action applied', status=status.HTTP_200_OK)

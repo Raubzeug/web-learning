@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'graphene_django',
+    'django_rq',
 
     'courses_app.apps.CoursesAppConfig',
     'account_app.apps.AccountAppConfig',
@@ -164,5 +165,13 @@ EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
-DEFAULT_FROM_EMAIL = 'Elena Makarova'
+DEFAULT_FROM_EMAIL = ''
 DEFAULT_TO_EMAIL = ''
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+    }
+}
