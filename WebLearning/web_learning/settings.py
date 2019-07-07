@@ -163,10 +163,10 @@ REST_FRAMEWORK = {
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
-EMAIL_HOST_USER = 'killedandsaved@mail.ru'
-EMAIL_HOST_PASSWORD = 'PainLovePoetry'
-DEFAULT_FROM_EMAIL = 'Elena Makarova'
-DEFAULT_TO_EMAIL = 'killedandsaved@mail.ru'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = ''
+DEFAULT_TO_EMAIL = ''
 
 RQ_QUEUES = {
     'default': {
