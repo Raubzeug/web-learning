@@ -39,17 +39,19 @@
 }
 
 .datetime {
-    width: 20%;
+    width: 200px;
+    min-width: 100 px;
 }
 
 .description {
-    width: 40%
+    width: 500px;
+    min-width: 200 px;
 }
 
 .tutor {
-    width: 20%;
+    width: 200px;
+    min-width: 100 px;
 }
-
 
 .schedule-table__row {
     padding: 15px;

@@ -1,29 +1,28 @@
 class Lesson {
-    constructor (id, title, desc, course_id, date) {
+    constructor (id, title, desc, courseId, date) {
         this.id = id;
         this.title = title;
         this.desc = title;
-        this.course_id = course_id;
+        this.courseId = courseId;
         this.date = date;
         this.tutor = 'Лисица Рыжая Коварная'
     }
 }
 
-var les1 = new Lesson (1, 'Введение в Python. Расскажем про основные типы данных в Python - числа,' +
- 'строки, списки, словари, множества. Изучим, как писать функции, а также коснемся понятия ООП и классов.',
-  '', 1, new Date(2019,6,5))
-var les2 = new Lesson (2, 'Введение в CSS', '', 2, new Date(2019,6,14))
-var les3 = new Lesson (3, 'Обзор JS', '', 3, new Date(2019,6,12))
-var les4 = new Lesson (4, 'Общение - это легко', '', 4, new Date(2019,7,1))
-var les5 = new Lesson (5, 'Наследование в Python', '', 1, new Date(2019,6,18))
-var les6 = new Lesson (6, 'Наследование и каскадирование в CSS ', '', 2, new Date(2019,6,25))
-var les7 = new Lesson (7, 'Классы и наследование в JS', '', 3, new Date(2019,7,30))
-var les8 = new Lesson (8, 'Как стать хорошим собеседником?', '', 4, new Date(2019,6,11))
-var les9 = new Lesson (9, 'Классы в Python', '', 1, new Date(2019,7,15))
-var les10 = new Lesson (10, 'Асинхронность в Python', '', 1, new Date(2019,7,25))
-
-var lessons = [les10, les2, les3, les4, les5, les7, les6, les8, les9, les1]
-
+var lessons = [
+        new Lesson (0, 'Введение в Python. Расскажем про основные типы данных в Python - числа,' +
+        'строки, списки, словари, множества. Изучим, как писать функции, а также коснемся понятия ООП и классов.',
+        '', 1, new Date(2019,6,5)),
+        new Lesson (1, 'Введение в CSS', '', 2, new Date(2019,6,14)),
+        new Lesson (2, 'Обзор JS', '', 3, new Date(2019,6,12)),
+        new Lesson (3, 'Общение - это легко', '', 4, new Date(2019,7,1)),
+        new Lesson (4, 'Наследование в Python', '', 1, new Date(2019,6,18)),
+        new Lesson (5, 'Наследование и каскадирование в CSS ', '', 2, new Date(2019,6,25)),
+        new Lesson (6, 'Классы и наследование в JS', '', 3, new Date(2019,7,30)),
+        new Lesson (7, 'Как стать хорошим собеседником?', '', 4, new Date(2019,6,11)),
+        new Lesson (8, 'Классы в Python', '', 1, new Date(2019,7,15)),
+        new Lesson (9, 'Асинхронность в Python', '', 1, new Date(2019,7,25)),
+        ]
 
 var coursesData = [
 {id: 1,
@@ -70,7 +69,6 @@ for (var course in coursesData) {
 var table = document.querySelector('.schedule-table')
 
 filter.onchange = function() {
-    console.log(this.value);
   var items = table.children;
   for (var i=1; i<items.length; i++) {
     var course = items[i].lastChild
@@ -82,13 +80,9 @@ filter.onchange = function() {
   }
 };
 
-
 // schedule table filling
 
-lessons.sort(function(a, b) {
-     return Date.parse(a.date) - Date.parse(b.date);
-     }
-     )
+lessons.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
 
 var tableFiller = (colNumber, cellClass, data, table) => {
     var tr = document.createElement('tr')
@@ -115,5 +109,5 @@ var options = {
 
 for (var i = 0; i < lessons.length; i++) {
     tableFiller(4, cellClass='schedule-table__row', data=[lessons[i].date.toLocaleString('ru', options),
-    lessons[i].desc, lessons[i].tutor, coursesData[lessons[i].course_id - 1].name], table)
+    lessons[i].desc, lessons[i].tutor, coursesData[lessons[i].courseId - 1].name], table)
 }
