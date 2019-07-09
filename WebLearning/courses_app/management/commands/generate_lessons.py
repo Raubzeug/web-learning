@@ -11,7 +11,7 @@ import random
 
 class Command(BaseCommand):
 
-    def generate(self, amount=100):
+    def generate(self, amount=50):
         fake = Faker()
         courses = Course.objects.values_list('id',flat=True)
         for i in range(amount):

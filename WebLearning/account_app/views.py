@@ -24,8 +24,10 @@ def verify(request, uuid):
 
     return redirect('verification_successfull')
 
+
 def verification_successfull(request):
-    return HttpResponse("<html><body>You confirmed your email successfully.</body></html>")
+    return HttpResponse("<html><body>You have confirmed your email successfully.</body></html>")
+
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)

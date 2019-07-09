@@ -12,7 +12,7 @@ import random
 
 class Command(BaseCommand):
 
-    def generate(self, amount=100):
+    def generate(self, amount=20):
         fake = Faker()
         languages = Language.objects.all()
         pupils = list(CustomUser.objects.values_list('id', flat=True))

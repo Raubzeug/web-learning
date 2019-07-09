@@ -1,5 +1,6 @@
+from django.core.mail import send_mail
+from redis import ConnectionError as RedisConnectionError
 from .tasks import send_mail_conf
-
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
@@ -75,7 +76,10 @@ class CourseViewSet(viewsets.ModelViewSet):
             sender = 'killedandsaved@mail.ru'
             reciever = user.email
             subj = 'Enrolling course'
-            message = f'You succeslully enrolled course {course.title}'
-            send_mail_conf.delay(sender, reciever, subj, message)
+            message = f'You have succeslully enrolled the course {course.title}'
+            try:
+                send_mail_conf.delay(sender, reciever, subj, message)
+            except RedisConnectionError:
+                send_mail(subj, message, sender, [reciever], fail_silently=True)
             return Response(f'You\'ve succesfully enrolled the course {course}', status=status.HTTP_200_OK)
         return Response('No action applied', status=status.HTTP_200_OK)
