@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Keywords" content="learning, course, python, online, обучение, пайтон, программирование">
+    <meta name="Description" content="Сайт боевой лисички для  для онлайн обучения программированию">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="../css/styles_global.css">
+    <link rel="stylesheet" href="../css/styles_reg.css"> -->
+
+    <title>Vixen online learning</title>
+</head>
+<header>
+
+</header>
+<body>
+<div class='body-wrapper'>
+    <nav class="header">
+        <a class="header__logo" href="#" title="На главную">
+            <img src="../images/logo.png">
+        </a>
+
+            <ul class="navigation">
+                <li class='navigation__button button--active'><a class="navigation__link" href="/home/">HOME</a></li>
+                <li class='navigation__button'><a class="navigation__link" href="/home/">ABOUT US</a></li>
+                <li class='navigation__button'>
+                    <a class="navigation__link" href="/courses/">COURSES</a>
+                    <ul class="navigation__sub-menu">
+                        <li class='navigation__button'>
+                            <a class="navigation__link" href="#">SCHEDULE</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class='navigation__button'><a class="navigation__link" href="/partners/">TUTORS</a></li>
+                <li class='navigation__button'><a class="navigation__link" href="/contact/">CONTACTS</a></li>
+            </ul>
+
+        <div class='header__right-wrapper'>
+            <div class="search">
+                <form action="#" method="get">
+                    <input class="search__input" type="text" name="q" placeholder="Search">
+                    <button class="search__button" type="submit">GO</button>
+                </form>
+            </div>
+
+            <div class='register-login'>
+                <a class="register-login" href="#" title="Регистрация">
+                        <img src="../images/registration.png">Регистрация
+                </a>
+                <a class="register-login" href="#" title="Войти">
+                        <img src="../images/login.png">Войти
+                </a>
+
+            </div>
+        </div> 
+    </nav>
+
+    <section class="content">
+        <div class="content__header_gradient">
+                <span>Регистрация нового пользователя</span>
+        </div>
+        <div class='already-registered'>
+            Уже зарегистрированы?
+            <a class='simple-link' href='#'>Войти в личный кабинет</a>
+        </div>
+        <form class='reg-form' method="POST" autocomplete="on">
+            <label class='reg-form__label' for='login'>Логин:</label>
+            <input class='reg-form__input' type='text' name='login' id='login' required autofocus>
+            
+            <label class='reg-form__label' for='email'>Электронная почта:</label>
+            <input class='reg-form__input' type='email' name='email' id='email' required>
+            
+            <label class='reg-form__label' for='password'>Пароль:</label>
+            <input class='reg-form__input' type='password' name='password' id='password' required>
+            
+            <label class='reg-form__label' >Подтверждение пароля:</label>
+            <!-- <input class='reg-form__input' type='password' name='confirm_password' 
+                id='confirm_password' required onchange='check_pass()'> -->
+            <input class='reg-form__input' type='password' name='confirm_password' 
+                id='confirm_password' required>
+            <span class='reg-form__message'></span>
+
+            <div class="buttons">
+                    <input class='reg-form__submit' type="submit" value="Зарегистрироваться" disabled>
+            </div>
+
+        </form>
+
+    </section>
+
+    <div class="footer-wrapper">
+        <div class="footer">
+        ПОДВАЛ
+        </div>
+    </div>
+</div>
+
+<!-- <script src="jquery-3.4.1.slim.js"></script>
+<script src="registration.js"></script> -->
+<script type="text/javascript" src="registration.min.js"></script><script type="text/javascript" src="index.min.js"></script></body>
+
+</html>

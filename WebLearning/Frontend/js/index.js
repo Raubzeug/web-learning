@@ -1,3 +1,7 @@
+import '../styles/library.less';
+import '../styles/styles_global.less';
+import '../styles/styles_index.less';
+
 var coursesData = [
 {id: 1,
 name: 'Web разработка на Python',

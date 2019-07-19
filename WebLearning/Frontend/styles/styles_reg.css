@@ -1,0 +1,59 @@
+.content {
+  display: flex;
+  flex-direction: column;
+}
+.already-registered {
+  text-align: center;
+  padding: 10px;
+}
+.simple-link {
+  text-decoration: none;
+  color: #417495;
+}
+.reg-form {
+  width: 300px;
+  margin: 20px auto 20px;
+  padding: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+@media (min-width: 1024px) {
+  .reg-form {
+    width: 400px;
+  }
+}
+.reg-form__label {
+  display: block;
+  margin-bottom: 5px;
+}
+.reg-form__input {
+  display: inline-block;
+  width: 95%;
+  height: 24px;
+  margin-bottom: 10px;
+  padding: 2px 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.reg-form__buttons {
+  text-align: center;
+}
+.reg-form__submit {
+  display: block;
+  height: 30px;
+  width: auto;
+  margin: auto;
+  padding: 6px 15px;
+  color: white;
+  background-color: #417495;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.reg-form__submit:disabled {
+  background-color: #616d75;
+  cursor: default;
+}
+.reg-form__message {
+  max-width: 300px;
+  display: inline-block;
+  padding: 5px;
+}

@@ -6,7 +6,8 @@
     <meta name="Keywords" content="learning, course, python, online, обучение, пайтон, программирование">
     <meta name="Description" content="Сайт боевой лисички для  для онлайн обучения программированию">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+    <!-- <link rel="stylesheet" href="css/styles_global.css">
+    <link rel="stylesheet" href="css/styles_index.css"> -->
 
     <title>Vixen online learning</title>
 </head>
@@ -17,7 +18,7 @@
 <div class='body-wrapper'>
     <nav class="header">
         <a class="header__logo" href="#" title="На главную">
-            <img src="images/logo.png">
+            <img src="../images/logo.png">
         </a>
 
             <ul class="navigation">
@@ -35,12 +36,24 @@
                 <li class='navigation__button'><a class="navigation__link" href="/contact/">CONTACTS</a></li>
             </ul>
 
-        <div class="search">
-            <form action="#" method="get">
-                <input class="search__input" type="text" name="q" placeholder="Search">
-                <button class="search__button" type="submit">GO</button>
-            </form>
-        </div>
+        <div class='header__right-wrapper'>
+            <div class="search">
+                <form action="#" method="get">
+                    <input class="search__input" type="text" name="q" placeholder="Search">
+                    <button class="search__button" type="submit">GO</button>
+                </form>
+            </div>
+
+            <div class='register-login'>
+                <a class="register-login" href="#" title="Регистрация">
+                        <img src="../images/registration.png">Регистрация
+                </a>
+                <a class="register-login" href="#" title="Войти">
+                        <img src="../images/login.png">Войти
+                </a>
+
+            </div>
+        </div> 
     </nav>
 
     <section class="content">
@@ -63,7 +76,7 @@
                         </div>
                         <div class="course-content">
                           <figure class="course-figure">
-                            <img class="course-img" src="images/python-1.png" alt="Python-1">
+                            <img class="course-img" src="../images/python-1.png" alt="Python-1">
                             <figcaption>
                               <p>Много всего интересного про язык программирования Python</p>
                             </figcaption>
@@ -82,7 +95,7 @@
                         </div>
                         <div class="course-content">
                           <figure class="course-figure">
-                            <img class="course-img" src="images/css-1.png" alt="CSS-1">
+                            <img class="course-img" src="../images/css-1.png" alt="CSS-1">
                             <figcaption>
                               <p>Всякая разная информация о верстке с помощью CSS и еще всякая
                               разная информация и еще и еще и еще чтобы проверить, как верстается карточка курса.</p>
@@ -137,16 +150,16 @@
         <aside class="content-right-wrapper">
             <div class="content__header">Предложения работодателей</div>
             <div class="company">
+                <a class="company-logo" href="#"><img src="../images/wolf.png"></a>
                 <div class="company-name">АО "Волчий софт"</div>
-                <a class="company-logo" href="#"><img src="images/wolf.png"></a>
             </div>
             <div class="company">
+                <a class="company-logo" href="#"><img src="../images/rabbit.png"></a>
                 <div class="company-name">Государственная корпорация "Зайцы-тестировщики"</div>
-                <a class="company-logo" href="#"><img src="images/rabbit.png"></a>
             </div>
             <div class="company">
+                <a class="company-logo" href="#"><img src="../images/bear.png"></a>
                 <div class="company-name">Студия "Дизайн от медведя Семена"</div>
-                <a class="company-logo" href="#"><img src="images/bear.png"></a>
             </div>
         </aside>
     </section>
@@ -157,7 +170,7 @@
         </div>
     </div>
 </div>
-<script src="script.js"></script>
-</body>
+<!-- <script src="script.js"></script> -->
+<script type="text/javascript" src="registration.min.js"></script><script type="text/javascript" src="index.min.js"></script></body>
 
 </html>

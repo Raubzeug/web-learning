@@ -18,6 +18,8 @@ graphene-django = "*"
 graphene = "*"
 django-filter = "*"
 rq = "*"
+django-rq = "*"
+rq-scheduler = "*"
 
 [requires]
 python_version = "3.7"

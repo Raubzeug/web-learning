@@ -1,0 +1,38 @@
+@desktop: ~"(min-width: 1024px)";
+
+@base_color: #bfd5e3;
+@base_color_light: lighten(@base_color, 10%);
+@medium_base_color: darken(@base_color, 10%);
+@dark_base_color: darken(@base_color, 20%);
+@darkest_base_color: darken(@base_color, 40%);
+@violet: spin(@base_color, 50); 
+
+@font-size-main: 14px;
+@font-size-headers: @font-size-main * 2;
+@black: black;
+@light-black-text: lighten(@black, 20%);
+@black-shadow-light: fade(@black, 20%);
+@gradient-gray: linear-gradient(to bottom, white, darken(white, 20%));
+@gray-button-shadow: 0 1px 4px @black-shadow-light;
+
+@quote-background: lighten(spin(@base_color, 180), 15%); 
+
+.flex-wrap() {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-column() {
+    display: flex;
+    flex-direction: column;
+}
+
+.non-decorated-gray-link() {
+    text-decoration: none;
+    color: @light-black-text;
+}
+
+.non-decorated-white-link() {
+    text-decoration: none;
+    color: white;
+}
