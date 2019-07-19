@@ -1,6 +1,8 @@
 **playground.html
 **playground.css
 **playground.js
+**/playground
+**/node_modules
 
 # IDE settings
 .idea
