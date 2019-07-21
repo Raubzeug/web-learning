@@ -1,8 +1,5 @@
 @import 'library';
-
-.content {
-    .flex-column;
-}
+@import 'styles_global';
 
 .schedule-wrapper {
     align-self: stretch;
@@ -20,13 +17,19 @@
 
 .schedule-table {
     border-collapse: collapse;
-}
 
-.schedule-table__header {
-    font-size: 20px;
-    text-align: center;
-    padding: 10px;
-    border-bottom: 2px solid @black-shadow-light;
+    &__header {
+        font-size: 20px;
+        text-align: center;
+        padding: 10px;
+        border-bottom: 2px solid @black-shadow-light;
+    }
+
+    &__row {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid @black-shadow-light;
+    }
 }
 
 .datetime {
@@ -44,8 +47,3 @@
     min-width: 100px;
 }
 
-.schedule-table__row {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid @black-shadow-light;
-}

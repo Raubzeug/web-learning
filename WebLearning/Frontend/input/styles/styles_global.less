@@ -1,4 +1,5 @@
 @import "library";
+@import (css) url(http://fonts.googleapis.com/css?family=Open+Sans&);
 
 * {
     box-sizing: border-box;
@@ -128,9 +129,13 @@ body {
 
 
 .content {
-    .flex-wrap;
+    .flex-column;
 
     margin-bottom: 40px;
+
+    &__two-columns {
+        flex-direction: row;
+    }
 
     &__block {
         .flex-column;

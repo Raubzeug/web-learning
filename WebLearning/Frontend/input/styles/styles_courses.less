@@ -1,16 +1,8 @@
-.content__header_courses {
-    height: auto;
-    padding: 50px 10px;
-    width: 100%;
-    flex-grow: 1;
-    font-size: 28px;
-    font-weight: bold;
-    background: linear-gradient(45deg, #cdb8e3, #bfd5e3);
-}
+@import 'library';
+@import 'styles_global';
 
 .content__block_courses {
-    display: flex;
-    flex-direction: column;
+    .flex-column;
     flex-grow: 1;
 }
 
@@ -20,7 +12,7 @@
 
 .course_wrapper_full {
     width: 100%;
-    background: linear-gradient(45deg, white, #bfd5e3);
+    background: linear-gradient(45deg, white, @base_color);
 }
 
 .course_additional_info {
@@ -32,8 +24,7 @@
 }
 
 .course {
-    display: flex;
-    flex-direction: column;
+    .flex-column;
     margin: 10px;
     padding: 10px;
     flex-basis: 350px;
@@ -42,7 +33,7 @@
 }
 
 .course_hover {
-    background-color: #bfd5e3;
+    background-color: @base_color;
     transition: all .4s linear;
 }
 

@@ -108,6 +108,6 @@ var options = {
 };
 
 for (var i = 0; i < lessons.length; i++) {
-    tableFiller(4, cellClass='schedule-table__row', data=[lessons[i].date.toLocaleString('ru', options),
+    tableFiller(4, 'schedule-table__row', [lessons[i].date.toLocaleString('ru', options),
     lessons[i].desc, lessons[i].tutor, coursesData[lessons[i].courseId - 1].name], table)
 }

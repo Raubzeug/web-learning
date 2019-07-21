@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Keywords" content="learning, course, python, online, обучение, пайтон, программирование">
     <meta name="Description" content="Сайт боевой лисички для  для онлайн обучения программированию">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="../css/styles_global.css">
-    <link rel="stylesheet" href="../css/styles_reg.css"> -->
+    <link rel='stylesheet' href="css/styles.bundle.css">
 
     <title>Vixen online learning</title>
 </head>
@@ -60,13 +58,13 @@
         <div class="content__header_gradient">
                 <span>Регистрация нового пользователя</span>
         </div>
-        <div class='already-registered'>
+        <div class='centered-div-padding-10'>
             Уже зарегистрированы?
-            <a class='simple-link' href='#'>Войти в личный кабинет</a>
+            <a class='simple-link' href='./login.html'>Войти в личный кабинет</a>
         </div>
-        <form class='reg-form' method="POST" autocomplete="on">
-            <label class='reg-form__label' for='login'>Логин:</label>
-            <input class='reg-form__input' type='text' name='login' id='login' required autofocus>
+        <form class='reg-form' method="POST" action='/api/auth/registration/' autocomplete="on">
+            <label class='reg-form__label' for='username'>Логин:</label>
+            <input class='reg-form__input' type='text' name='username' id='username' required autofocus>
             
             <label class='reg-form__label' for='email'>Электронная почта:</label>
             <input class='reg-form__input' type='email' name='email' id='email' required>
@@ -75,14 +73,12 @@
             <input class='reg-form__input' type='password' name='password' id='password' required>
             
             <label class='reg-form__label' >Подтверждение пароля:</label>
-            <!-- <input class='reg-form__input' type='password' name='confirm_password' 
-                id='confirm_password' required onchange='check_pass()'> -->
             <input class='reg-form__input' type='password' name='confirm_password' 
                 id='confirm_password' required>
             <span class='reg-form__message'></span>
 
             <div class="buttons">
-                    <input class='reg-form__submit' type="submit" value="Зарегистрироваться" disabled>
+                    <input class='reg-form__submit' type="submit" value="Зарегистрироваться">
             </div>
 
         </form>
@@ -96,8 +92,7 @@
     </div>
 </div>
 
-<!-- <script src="jquery-3.4.1.slim.js"></script>
-<script src="registration.js"></script> -->
+<script src="js/registration.min.js"></script>
 </body>
 
 </html>

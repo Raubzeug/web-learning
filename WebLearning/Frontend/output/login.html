@@ -59,29 +59,25 @@
                 <span>Регистрация нового пользователя</span>
         </div>
         <div class='centered-div-padding-10'>
-            Уже зарегистрированы?
-            <a class='simple-link' href='./login.html'>Войти в личный кабинет</a>
+            Не зарегистрированы?
+            <a class='simple-link' href='./registration.html'>Зарегистрироваться</a>
         </div>
-        <form class='reg-form' method="POST" action='/api/auth/registration/' autocomplete="on">
+        <form class='reg-form' action='/api/auth/login/' method="POST" autocomplete="on">
             <label class='reg-form__label' for='username'>Логин:</label>
             <input class='reg-form__input' type='text' name='username' id='username' required autofocus>
-            
-            <label class='reg-form__label' for='email'>Электронная почта:</label>
-            <input class='reg-form__input' type='email' name='email' id='email' required>
-            
+                      
             <label class='reg-form__label' for='password'>Пароль:</label>
             <input class='reg-form__input' type='password' name='password' id='password' required>
-            
-            <label class='reg-form__label' >Подтверждение пароля:</label>
-            <input class='reg-form__input' type='password' name='confirm_password' 
-                id='confirm_password' required>
-            <span class='reg-form__message'></span>
 
             <div class="buttons">
-                    <input class='reg-form__submit' type="submit" value="Зарегистрироваться">
+                    <input class='reg-form__submit' type="submit" value="Войти в личный кабинет">
             </div>
 
         </form>
+        <div class='centered-div-padding-10'>
+            Забыли пароль?
+            <a class='simple-link' href='#'>Восстановление пароля</a>
+        </div>
 
     </section>
 
@@ -92,7 +88,6 @@
     </div>
 </div>
 
-<script src="js/registration.min.js"></script>
 </body>
 
 </html>

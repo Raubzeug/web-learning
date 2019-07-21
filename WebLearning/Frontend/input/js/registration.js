@@ -1,7 +1,3 @@
-import '../styles/library.less';
-import '../styles/styles_global.less';
-import '../styles/styles_reg.less';
-
 const $ = require("jquery");
 
 $(document).ready(function() {

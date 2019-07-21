@@ -1,33 +1,29 @@
-import '../styles/library.less';
-import '../styles/styles_global.less';
-import '../styles/styles_index.less';
-
 var coursesData = [
 {id: 1,
 name: 'Web разработка на Python',
 lang: 'Python',
-img: 'images/python-1.png',
+img: '../images/python-1.png',
 desc: 'Много всего интересного про язык программирования Python',
 link: '/courses/python-1.html'},
 
 {id: 2,
 name: 'Верстка с помощью CSS',
 lang: 'CSS',
-img: 'images/css-1.png',
+img: '../images/css-1.png',
 desc: 'Всякая разная информация о верстке с помощью CSS и еще всякая разная информация и еще и еще и еще чтобы проверить, как верстается карточка курса.',
 link: '/courses/css-1.html'},
 
 {id: 3,
 name: 'JavaScript для продвинутых',
 lang: 'JavaScript',
-img: 'images/js.png',
+img: '../images/js.png',
 desc: 'После прохождения этого курса вы сможете вдохнуть жизнь и движение в свои проекты.',
 link: '/courses/javascript-1.html'},
 
 {id: 4,
 name: 'Софт-скиллз для разработчиков',
 lang: 'Разное',
-img: 'images/foxy.png',
+img: '../images/foxy.png',
 desc: 'Ты погружен в мир технологий и совершенно не умеешь общаться с живыми людьми? Лисичка тебе поможет!',
 link: '/courses/softskills.html'},
 
