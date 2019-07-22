@@ -30,6 +30,7 @@ link: '/courses/softskills.html'},
 ]
 
 
+
 var coursesListField = document.querySelector('.courses')
 var courseTemp = coursesListField.querySelector('#course-template').content
 var newCourseTemp = courseTemp.querySelector('.course_wrapper')

@@ -24,6 +24,7 @@ function generateHtmlPlugins(templateDir) {
 
 
 module.exports = {
+  
     entry: {
         styles: __dirname + '/input/styles/app.less',
         courses: __dirname + "/input/js/courses.js",
@@ -34,14 +35,15 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'output'),
         filename: 'js/[name].min.js',
+        library: '[name]'
     },
     module: {
         rules: [{
             test: /\.js$/,
-            exclude: /node_modules/,
+            exclude: /\/node_modules\//,
             include: path.resolve(__dirname, 'js'),
             use: {
-                loader: 'babel-loader',
+                loader: 'babel-loader?optional[]=runtime',
                 options: {
                     presets: ['babel-preset-env']
                 },
@@ -49,7 +51,7 @@ module.exports = {
         },
         {
             test: /\.less$/,
-            exclude: /node_modules/,
+            exclude: /\/node_modules\//,
             include: path.resolve(__dirname, 'input/styles'),
             use: [{
                 loader: MiniCssExtractPlugin.loader,
@@ -74,5 +76,13 @@ module.exports = {
         new CopyPlugin([
             { from: 'input/images', to: 'images' },
           ]),
-    ].concat(htmlPlugins)
+          new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+          })
+    ].concat(htmlPlugins),
+
+    resolve: {
+        extensions: ['.js', '.jsx', '.json', '.css', '.less']
+    },
 };

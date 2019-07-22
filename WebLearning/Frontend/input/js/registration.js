@@ -1,4 +1,4 @@
-const $ = require("jquery");
+// const $ = require("jquery");
 
 $(document).ready(function() {
   $('#confirm_password').change(function() {
@@ -17,6 +17,8 @@ $(document).ready(function() {
       }
   });
 });
+
+console.log(Response)
 
 // var check_pass = () => {
 //     let message = document.querySelector('.reg-form__message')
