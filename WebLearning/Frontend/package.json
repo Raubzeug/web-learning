@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "express": "^4.16.3",
-    "fs": "0.0.1-security",
     "jquery": "^3.4.1"
   },
   "devDependencies": {
@@ -22,9 +21,9 @@
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
-    "style-loader": "^0.23.1",
     "webpack": "^4.4.1",
     "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.7.2"
+    "webpack-dev-server": "^3.7.2",
+    "fs": "0.0.1-security"
   }
 }
