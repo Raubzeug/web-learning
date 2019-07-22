@@ -85,4 +85,8 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx', '.json', '.css', '.less']
     },
+    optimization: {
+        namedModules: true,
+        namedChunks: true
+    }
 };

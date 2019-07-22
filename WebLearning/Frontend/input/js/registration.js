@@ -18,7 +18,6 @@ $(document).ready(function() {
   });
 });
 
-console.log(Response)
 
 // var check_pass = () => {
 //     let message = document.querySelector('.reg-form__message')
