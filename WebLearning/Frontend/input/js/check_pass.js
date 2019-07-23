@@ -1,4 +1,4 @@
-// import $ from 'jquery';
+import $ from 'jquery';
 
 let check_pass = $(document).ready(function() {
   $('#confirm_password').change(function() {

@@ -1,3 +1,3 @@
 import check_pass from './check_pass';
 
-console.log('i am here')
+console.log('ththth')

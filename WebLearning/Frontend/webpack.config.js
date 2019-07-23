@@ -67,14 +67,15 @@ module.exports = {
         new CopyPlugin([
             { from: 'input/images', to: 'images' },
           ]),
-        new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery'
-        }),
+        // new webpack.ProvidePlugin({
+        // $: 'jquery',
+        // jQuery: 'jquery',
+        // 'window.jQuery': 'jquery'
+        // }),
         ...PAGES.map(page => new HtmlWebpackPlugin({
             template: `${PAGES_DIR}/${page}`,
-            filename: `./${page}`
+            filename: `./${page}`,
+            inject: false
           }))
     ],
 
