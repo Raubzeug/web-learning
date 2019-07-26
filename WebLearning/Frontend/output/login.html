@@ -7,7 +7,7 @@
     <meta name="Description" content="Сайт боевой лисички для  для онлайн обучения программированию">
     <link rel='stylesheet' href="css/styles.bundle.css">
 
-    <title>Vixen online learning</title>
+    <title>Login - Vixen online learning</title>
 </head>
 <header>
 
@@ -60,24 +60,27 @@
         </div>
         <div class='centered-div-padding-10'>
             Не зарегистрированы?
-            <a class='simple-link' href='./registration.html'>Зарегистрироваться</a>
+            <a class='base-link' href='./registration.html'>Зарегистрироваться</a>
         </div>
-        <form class='reg-form' action='/api/auth/login/' method="POST" autocomplete="on">
-            <label class='reg-form__label' for='username'>Логин:</label>
-            <input class='reg-form__input' type='text' name='username' id='username' required autofocus>
-                      
-            <label class='reg-form__label' for='password'>Пароль:</label>
-            <input class='reg-form__input' type='password' name='password' id='password' required>
-
-            <div class="buttons">
-                    <input class='reg-form__submit' type="submit" value="Войти в личный кабинет">
-            </div>
-
-        </form>
+        <form class='login-form' method="POST" name='login' autocomplete="on">
+                <label class='login-form__label' for='username'>Логин:</label>
+                <input class='login-form__input' type='text' name='username' id='username' required autofocus>
+                
+                <label class='login-form__label' for='password'>Пароль:</label>
+                <input class='login-form__input' type='password' name='password' id='password' required>
+            
+    
+                <div class="login-form__buttons">
+                        <input class='login-form__submit' type="submit" value="Войти">
+                </div>
+                <div class='message'></div>
+    
+            </form>
         <div class='centered-div-padding-10'>
             Забыли пароль?
-            <a class='simple-link' href='#'>Восстановление пароля</a>
+            <a class='base-link' href='#'>Восстановление пароля</a>
         </div>
+        
 
     </section>
 
@@ -87,7 +90,7 @@
         </div>
     </div>
 </div>
-
+<script src='js/login.min.js'></script>
 </body>
 
 </html>

@@ -66,7 +66,7 @@ body {
 }
 
 .register-login {
-    .non-decorated-gray-link;
+    .non-decorated-link(@light-black-text);
     text-align: right;
     padding: 5px;
 
@@ -94,7 +94,7 @@ body {
     }
 
     &__link {
-        .non-decorated-white-link;
+        .non-decorated-link(white);
         display: block;
         width: 100%;
         height: 100%;
@@ -208,7 +208,7 @@ body {
     }
 
     &-info-button {
-        .non-decorated-gray-link;
+        .non-decorated-link(@light-black-text);
         display: block;
         margin-top: auto;
         flex-shrink: 0;
@@ -236,4 +236,17 @@ body {
     margin-bottom: 0px;
     padding: 20px 0 10px 0;
     background-color: @base_color;
+}
+
+.centered-div-padding-10 {
+    text-align: center;
+    padding: 10px;
+}
+
+.message {
+    padding: 5px;
+}
+
+.base-link {
+.non-decorated-link(@darkest_base_color)
 }

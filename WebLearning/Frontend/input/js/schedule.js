@@ -1,3 +1,27 @@
+import {getCookie} from './getCookie'
+import {checkMenuButton} from './checkMenuButton'
+
+$(document).ready(function () {
+  var headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': 'Token ' + getCookie('token'),
+    // 'sessionid': getCookie('sessionid')
+}
+console.log(headers)
+  fetch('http://localhost:8000/api/users/', {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      // mode: 'no-cors', // no-cors, cors, *same-origin
+      // cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+      // credentials: 'include', // include, *same-origin, omit
+      headers: headers
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+
+}
+)
+
 class Lesson {
     constructor (id, title, desc, courseId, date) {
         this.id = id;

@@ -20,6 +20,7 @@ module.exports = {
         courses: PATHS.input + "/js/courses.js",
         registration: PATHS.input + "/js/registration.js",
         schedule: PATHS.input + "/js/schedule.js",
+        login: PATHS.input + "/js/login.js",
         }
     ,
     output: {
@@ -67,11 +68,11 @@ module.exports = {
         new CopyPlugin([
             { from: 'input/images', to: 'images' },
           ]),
-        // new webpack.ProvidePlugin({
-        // $: 'jquery',
-        // jQuery: 'jquery',
-        // 'window.jQuery': 'jquery'
-        // }),
+        new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery'
+        }),
         ...PAGES.map(page => new HtmlWebpackPlugin({
             template: `${PAGES_DIR}/${page}`,
             filename: `./${page}`,

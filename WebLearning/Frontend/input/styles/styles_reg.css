@@ -227,3 +227,52 @@ body {
   text-decoration: none;
   color: #417495;
 }
+.login-form,
+.reg-form {
+  width: 300px;
+  margin: auto auto;
+  padding: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+@media (min-width: 1024px) {
+  .login-form,
+  .reg-form {
+    width: 400px;
+  }
+}
+.login-form__label,
+.reg-form__label {
+  display: block;
+  margin-bottom: 5px;
+}
+.login-form__input,
+.reg-form__input {
+  display: inline-block;
+  width: 95%;
+  height: 24px;
+  margin-bottom: 10px;
+  padding: 2px 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.login-form__buttons,
+.reg-form__buttons {
+  text-align: center;
+}
+.login-form__submit,
+.reg-form__submit {
+  display: block;
+  height: 30px;
+  width: auto;
+  margin: auto;
+  padding: 6px 15px;
+  color: white;
+  background-color: #417495;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.login-form__submit:disabled,
+.reg-form__submit:disabled {
+  background-color: #616d75;
+  cursor: default;
+}

@@ -7,7 +7,7 @@
     <meta name="Description" content="Сайт боевой лисички для  для онлайн обучения программированию">
     <link rel='stylesheet' href="css/styles.bundle.css">
 
-    <title>Vixen online learning</title>
+    <title>Registration - Vixen online learning</title>
 </head>
 <header>
 
@@ -20,7 +20,7 @@
         </a>
 
             <ul class="navigation">
-                <li class='navigation__button button--active'><a class="navigation__link" href="/index.html">HOME</a></li>
+                <li class='navigation__button'><a class="navigation__link" href="/index.html">HOME</a></li>
                 <li class='navigation__button'><a class="navigation__link" href="/home/">ABOUT US</a></li>
                 <li class='navigation__button'>
                     <a class="navigation__link" href="/courses/">COURSES</a>
@@ -60,9 +60,9 @@
         </div>
         <div class='centered-div-padding-10'>
             Уже зарегистрированы?
-            <a class='simple-link' href='./login.html'>Войти в личный кабинет</a>
+            <a class='base-link' href='./login.html'>Войти в личный кабинет</a>
         </div>
-        <form class='reg-form' method="POST" action='/api/auth/registration/' autocomplete="on">
+        <form class='reg-form' method="POST" name='registration' autocomplete="on">
             <label class='reg-form__label' for='username'>Логин:</label>
             <input class='reg-form__input' type='text' name='username' id='username' required autofocus>
             
@@ -75,11 +75,11 @@
             <label class='reg-form__label' >Подтверждение пароля:</label>
             <input class='reg-form__input' type='password' name='confirm_password' 
                 id='confirm_password' required>
-            <span class='reg-form__message'></span>
 
-            <div class="buttons">
+            <div class="reg-form__buttons">
                     <input class='reg-form__submit' type="submit" value="Зарегистрироваться">
             </div>
+            <div class='message'></div>
 
         </form>
 
