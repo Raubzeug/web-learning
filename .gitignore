@@ -6,7 +6,7 @@
 **/server.js
 
 # app bundle
-**/output
+**/output/
 
 # IDE settings
 .idea
