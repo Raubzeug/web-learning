@@ -6,21 +6,21 @@ const CopyPlugin = require('copy-webpack-plugin');
 const fs = require('fs')
 
 const PATHS = {
-    input: path.join(__dirname, 'input'),
+    src: path.join(__dirname, 'src'),
     output: path.join(__dirname, 'output'),
   }
 
-const PAGES_DIR = PATHS.input + '/html/'
+const PAGES_DIR = PATHS.src + '/html/'
 const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.html'))
 
 module.exports = {
   
     entry: {
-        styles: PATHS.input + '/styles/app.less',
-        courses: PATHS.input + "/js/courses.js",
-        registration: PATHS.input + "/js/registration.js",
-        schedule: PATHS.input + "/js/schedule.js",
-        login: PATHS.input + "/js/login.js",
+        styles: PATHS.src + '/styles/app.less',
+        courses: PATHS.src + "/js/courses.js",
+        registration: PATHS.src + "/js/registration.js",
+        schedule: PATHS.src + "/js/schedule.js",
+        login: PATHS.src + "/js/login.js",
         }
     ,
     output: {
@@ -44,7 +44,7 @@ module.exports = {
         {
             test: /\.less$/,
             exclude: /\/node_modules\//,
-            include: path.resolve(__dirname, 'input/styles'),
+            include: path.resolve(__dirname, 'src/styles'),
             use: [{
                 loader: MiniCssExtractPlugin.loader,
 
@@ -66,7 +66,7 @@ module.exports = {
             filename:'./css/styles.bundle.css',
         }),
         new CopyPlugin([
-            { from: 'input/images', to: 'images' },
+            { from: 'src/images', to: 'images' },
           ]),
         new webpack.ProvidePlugin({
         $: 'jquery',

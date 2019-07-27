@@ -2,7 +2,6 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "express": "node server.js",
     "proxy": "webpack-dev-server"
   },
   "dependencies": {

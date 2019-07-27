@@ -1,17 +1,24 @@
-import {checkPass} from './check_pass';
-import {sendData} from './sendData';
+import {checkPass} from './checkPass';
 import {checkMenuButton} from './checkMenuButton'
+import { getCookie } from './getCookie';
 
 $('.reg-form').on('submit', function (event) {
   event.preventDefault();
   $('.message').html('');
   var result = {}
   $(this).serializeArray().forEach( (item) => result[item.name] = item.value);
+
   var headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-}
-  sendData('/api/auth/registration/', result, 'POST', headers)
+    'X-CSRFToken': getCookie('csrftoken')
+    }
+
+  fetch('/api/auth/registration/', {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(result),
+  })
   .then(response => {
       if (response.ok) {
           $('.message').css('color', 'green');

@@ -1,4 +1,3 @@
-import {sendData} from './sendData'
 import {getCookie} from './getCookie'
 import {checkMenuButton} from './checkMenuButton'
 
@@ -12,8 +11,13 @@ import {checkMenuButton} from './checkMenuButton'
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'X-CSRFToken': getCookie('csrftoken'),
-    }
-    sendData('/api/auth/login/', result, 'POST', headers)
+        }
+    fetch('/api/auth/login/', {
+      method: 'POST',
+      headers: headers,
+      credentials: 'include',
+      body: JSON.stringify(result),
+  })
     .then(response => {
     if (response.ok) {
         $('.message').css('color', 'green');
@@ -24,12 +28,11 @@ import {checkMenuButton} from './checkMenuButton'
     return response.json()})
     .then(data => {
         if ('token' in data) {
-            var token = 'token=' + data['token']
-            document.cookie = token
-            var session = 'sessionid='+data['sessionid']
-            // document.cookie = session
-            // console.log(document.cookie)
-            $('.message').html('You are sucessfully logged in!');
+            // sessionStorage.setItem('APItoken', data['token'])
+            // console.log(sessionStorage)
+        //    let token = 'token=' + data['token']
+        //    document.cookie = token
+           $('.message').html('You are sucessfully logged in!');
         }
         else {
             for (var key in data) {

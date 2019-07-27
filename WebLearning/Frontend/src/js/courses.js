@@ -1,20 +1,21 @@
 import {checkMenuButton} from './checkMenuButton'
+import {getCookie} from './getCookie'
 
 var coursesListField = $('.courses')
 var courseTemp = $('#course-template').prop('content')
 
 $(document).ready(function() {
+    console.log(document.cookie)
 
     var headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
+    'X-CSRFToken': getCookie('csrftoken')
     // 'Authorization': 'Token ' + getCookie('token'),
 }
-  fetch('http://localhost:8000/api/courses/', {
-      method: 'GET', // *GET, POST, PUT, DELETE, etc.
-      // mode: 'no-cors', // no-cors, cors, *same-origin
-      // cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-      //credentials: 'include', // include, *same-origin, omit
+  fetch('/api/courses/', {
+      method: 'GET',
+      credentials: 'include',
       headers: headers
   })
   .then(response => response.json())

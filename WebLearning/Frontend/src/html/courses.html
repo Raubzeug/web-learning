@@ -7,14 +7,14 @@
     <meta name="Description" content="Сайт боевой лисички для  для онлайн обучения программированию">
     <link rel='stylesheet' href="css/styles.bundle.css">
 
-    <title>Vixen online learning</title>
+    <title>Course list - Vixen online learning</title>
 </head>
 <header>
 
 </header>
 <body>
 <div class='body-wrapper'>
-     <nav class="header">
+    <nav class="header">
         <a class="header__logo" href="/index.html" title="На главную">
             <img src="../images/logo.png">
         </a>
@@ -43,10 +43,10 @@
                 </div>
     
                 <div class='register-login'>
-                    <a class="register-login" href="./registration.html" title="Регистрация">
+                    <a class="register-login" href="/registration.html" title="Регистрация">
                             <img src="../images/registration.png">Регистрация
                     </a>
-                    <a class="register-login" href="./login.html" title="Войти">
+                    <a class="register-login" href="/login.html" title="Войти">
                             <img src="../images/login.png">Войти
                     </a>
     
@@ -55,22 +55,46 @@
     </nav>
 
     <section class="content">
-            <div class="content__header_gradient">
-                <span>Расписание занятий</span>
-            </div>
-            <div class="schedule-wrapper">
-                <select class="schedule-filter">
-                      <option value="all">все</option>
-                </select>
-                <table class='schedule-table'>
-                    <tr>
-                        <th class='schedule-table__header datetime'>Дата и время</th>
-                        <th class='schedule-table__header description'>Событие</th>
-                        <th class='schedule-table__header tutor'>Преподаватель</th>
-                        <th class='schedule-table__header'>Курс</th>
-                    </tr>
 
-                </table>
+                <div class="content__header_gradient">
+                    <span>Здесь вы можете ознакомиться с полным перечнем наших курсов и выбрать обучение себе по душе</span>
+                </div>
+                <div class="courses">
+
+                    <template id='course-template'>
+                        <div class='course_wrapper'>
+                            <article class="course">
+                                <h1 class="course-heading"></h1>
+                                <div class="course-meta">
+                                  <div class="course-category">
+                                    <span class="course-icon course-tag">Категория: </span>
+                                    <span></span>
+                                  </div>
+                                </div>
+                                <div class="course-content">
+                                  <figure class="course-figure">
+                                    <img class="course-img" src="" alt="Course image">
+                                    <figcaption>
+
+                                    </figcaption>
+                                  </figure>
+
+                                  <a class="course-info-button" href="" title="Посмотреть информацию о курсе">
+                                      Посмотреть информацию о курсе
+                                  </a>
+
+                                </div>
+                            </article>
+                            <div class='course_additional_info hidden'>
+                                <h1> Информация о курсе</h1>
+                                <p>Подробное описание курса</p>
+                                <h1>Информация о преподавателе</h1>
+                                <p>Фото, достижения</p>
+                            </div>
+                        </div>
+                    </template>
+
+
             </div>
     </section>
 
@@ -80,7 +104,7 @@
         </div>
     </div>
 </div>
-<script src="js/schedule.min.js"></script>
+<script src="js/courses.min.js"></script>
 </body>
 
 </html>

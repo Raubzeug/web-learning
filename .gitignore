@@ -3,6 +3,10 @@
 **playground.js
 **/playground
 **/node_modules
+**/server.js
+
+# app bundle
+**/output
 
 # IDE settings
 .idea
