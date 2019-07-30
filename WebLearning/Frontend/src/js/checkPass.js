@@ -1,5 +1,5 @@
-export let checkPass = $(document).ready(function() {
-  $('#confirm_password').change(function() {
+export let checkPass = $(document).ready(() => {
+  $('#confirm_password').change(() => {
       let pas = $('#password').val();
       let pas_conf = $('#confirm_password').val();
       if (pas != pas_conf) {

@@ -4,8 +4,7 @@ import {getCookie} from './getCookie'
 var coursesListField = $('.courses')
 var courseTemp = $('#course-template').prop('content')
 
-$(document).ready(function() {
-    console.log(document.cookie)
+$(document).ready(() => {
 
     var headers = {
     'Content-Type': 'application/json',
@@ -20,21 +19,21 @@ $(document).ready(function() {
   })
   .then(response => response.json())
   .then(data => {
-    for (let key in data.results) {          
+    for (let key in data) {          
         let newCourse = $(courseTemp).find('.course_wrapper').clone();
-        $(newCourse).find('.course-heading').text(data.results[key].title)
-        $(newCourse).find('.course-category span').last().text(data.results[key].language)
-        $(newCourse).find('.course-figure figcaption').text(data.results[key].description)
+        $(newCourse).find('.course-heading').text(data[key].title)
+        $(newCourse).find('.course-category span').last().text(data[key].language)
+        $(newCourse).find('.course-figure figcaption').text(data[key].description)
         $(newCourse).find('.course-img').attr('src', "../images/foxy.png")
         let button = $(newCourse).find('.course-info-button')
         var flag = 0
-        newCourse.hover(function() {
+        newCourse.hover(() => {
             newCourse.addClass('course_hover')
         })
-        newCourse.mouseleave(function() {
+        newCourse.mouseleave(() => {
             newCourse.removeClass('course_hover')
         })
-        button.click(function (evt) {
+        button.click((evt) => {
             evt.preventDefault()
             if  (!newCourse.hasClass('course_wrapper_full')) {
                 newCourse.addClass('course_wrapper_full')
