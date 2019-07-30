@@ -18,10 +18,8 @@ def verify(request, uuid):
         user = User.objects.get(verification_uuid=uuid, email_confirmed=False)
     except User.DoesNotExist:
         raise Http404("User does not exist or is already verified")
-
     user.email_confirmed = True
     user.save()
-
     return redirect('verification_successfull')
 
 

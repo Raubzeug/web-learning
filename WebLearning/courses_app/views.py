@@ -1,5 +1,7 @@
 from django.core.mail import send_mail
 from redis import ConnectionError as RedisConnectionError
+from rest_framework.generics import get_object_or_404
+
 from .tasks import send_mail_conf
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
@@ -70,7 +72,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['get'], permission_classes=(IsAuthenticated, ))
     def enroll(self, request, pk=None):
         user = request.user
-        course = Course.objects.get(pk=pk)
+        course = get_object_or_404(Course, pk=pk)
         if course is not None and user.is_active:
             course.pupils.add(user)
             sender = 'killedandsaved@mail.ru'
@@ -82,4 +84,4 @@ class CourseViewSet(viewsets.ModelViewSet):
             except RedisConnectionError:
                 send_mail(subj, message, sender, [reciever], fail_silently=True)
             return Response(f'You\'ve succesfully enrolled the course {course}', status=status.HTTP_200_OK)
-        return Response('No action applied', status=status.HTTP_200_OK)
+        return Response('No action applied', status=status.HTTP_400_BAD_REQUEST)

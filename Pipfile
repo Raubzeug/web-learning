@@ -9,6 +9,7 @@ django-debug-toolbar = "*"
 django-graphiql-debug-toolbar = "*"
 django = "*"
 faker = "*"
+coverage = "*"
 
 [packages]
 django = "*"
