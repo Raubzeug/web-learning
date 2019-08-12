@@ -2,7 +2,7 @@ import {getCookie} from './getCookie'
 import {checkMenuButton} from './checkMenuButton'
 
 $(document).ready(function () {
-  var headers = {
+  const headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'Authorization': 'Token ' + getCookie('token'),

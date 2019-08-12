@@ -1,8 +1,8 @@
-export let checkPass = $(document).ready(() => {
+export const checkPass = $(document).ready(() => {
   $('#confirm_password').change(() => {
-      let pas = $('#password').val();
-      let pas_conf = $('#confirm_password').val();
-      if (pas != pas_conf) {
+      const pas = $('#password').val();
+      const pas_conf = $('#confirm_password').val();
+      if (pas !== pas_conf) {
           $('#confirm_password').css('border', 'red 1px solid');
           $('.message').css('color', 'red');
           $('.message').text('passwords not matching');

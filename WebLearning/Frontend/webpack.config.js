@@ -14,6 +14,7 @@ const PAGES_DIR = PATHS.src + '/html/'
 const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.html'))
 
 module.exports = {
+    mode: 'development',
   
     entry: {
         styles: PATHS.src + '/styles/app.less',
@@ -82,9 +83,5 @@ module.exports = {
 
     resolve: {
         extensions: ['.js', '.jsx', '.json', '.css', '.less']
-    },
-    optimization: {
-        namedModules: true,
-        namedChunks: true
     }
 };

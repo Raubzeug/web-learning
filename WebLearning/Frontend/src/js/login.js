@@ -4,10 +4,10 @@ import {checkMenuButton} from './checkMenuButton'
   $('.login-form').on('submit', function (event) {
     event.preventDefault();
     $('.message').html('');
-    var result = {}
+    const result = {}
     $(this).serializeArray().forEach( (item) => result[item.name] = item.value);
   
-    var headers = {
+    const headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'X-CSRFToken': getCookie('csrftoken'),
@@ -17,28 +17,22 @@ import {checkMenuButton} from './checkMenuButton'
       headers: headers,
       credentials: 'include',
       body: JSON.stringify(result),
-  })
-    .then(response => {
-    if (response.ok) {
-        $('.message').css('color', 'green');
-    }
-    else {
-        $('.message').css('color', 'red');
-    }
-    return response.json()})
-    .then(data => {
-        if ('token' in data) {
-            // sessionStorage.setItem('APItoken', data['token'])
-            // console.log(sessionStorage)
-        //    let token = 'token=' + data['token']
-        //    document.cookie = token
-           $('.message').html('You are sucessfully logged in!');
+    })
+        .then(response => {
+        if (response.ok) {
+            $('.message').css('color', 'green');
         }
         else {
-            for (var key in data) {
-                $('.message').append(key + ': ' + data[key] + '<br>')
-                }
+            $('.message').css('color', 'red');
+        }
+        return response.json()})
+        .then(data => {
+            if ('token' in data) {
+            $('.message').html('You are sucessfully logged in!');
             }
+            else {
+                Object.keys(data).forEach(key => $('.message').append(`${key}: ${data[key]}<br>`))
+                }
         })
-    .catch(err => console.error(err))
+        .catch(err => console.error(err))
 });

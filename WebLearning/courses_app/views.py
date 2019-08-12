@@ -49,6 +49,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         return BasicCourseSerializer
 
     def create(self, request, *args, **kwargs):
+        print('body', request.body)
         permission_class = IsAdminUser
         has_permissions = permission_class.has_permission(self, request, view=CourseViewSet)
         if has_permissions:

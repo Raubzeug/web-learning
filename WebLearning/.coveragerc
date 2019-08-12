@@ -1,0 +1,9 @@
+[run]
+ branch = True
+ source = .
+ omit =
+     */environment/*
+     */migrations/*
+      */gql_web_learning/*
+      */management/*
+      manage.py
