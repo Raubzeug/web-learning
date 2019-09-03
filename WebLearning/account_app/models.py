@@ -6,7 +6,9 @@ from django.core.mail import send_mail
 from django.db import models
 from django.urls import reverse
 
-from courses_app.tasks import send_mail_conf
+from .tasks import send_mail_conf
+
+from django.template import Template, Context
 
 class CustomUser(AbstractUser):
     email_confirmed = models.BooleanField(default=False)
@@ -25,20 +27,23 @@ class CustomUser(AbstractUser):
             message = """Follow this link to verify your account: http://localhost:8000{0}""" \
                 .format(reverse('verify', kwargs={'uuid': str(self.verification_uuid)}))
 
-            html_message = """
+            html_message = Template("""
             <!DOCTYPE html>
             <html>
                 <head>
                 </head>
                 <body>
-                    <p>Follow this link to verify your account: <a href='http://localhost:8000{0}'>verification link</a></p>
+                    <p>Follow this link to verify your account: 
+                        <a href='http://localhost:8000{{ ver_link }}'>verification link</a>
+                    </p>
                 </body>
             </html>
-            """.format(reverse('verify', kwargs={'uuid': str(self.verification_uuid)}))
+            """)
+            c = Context({'ver_link': reverse('verify', kwargs={'uuid': str(self.verification_uuid)})})
             try:
-                send_mail_conf.delay(sender, reciever, subj, message, html_message=html_message)
+                send_mail_conf.delay(sender, reciever, subj, message, html_message=html_message.render(c))
             except RedisConnectionError:
-                send_mail(subj, message, sender, [reciever], fail_silently=True, html_message=html_message)
+                send_mail(subj, message, sender, [reciever], fail_silently=True, html_message=html_message.render(c))
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
