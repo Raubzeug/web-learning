@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Basement = () => (
+const Footer = () => (
     <div className="footer-wrapper">
         <div className="footer">
         ПОДВАЛ
@@ -8,4 +8,4 @@ const Basement = () => (
     </div>
 )
 
-export default Basement
+export default Footer

@@ -10,7 +10,7 @@ const REVIEWS = [
 
 const Reviews = () => (
     <div className="feedback__block">
-        <div class="content__header">Отзывы студентов</div>
+        <div className="content__header">Отзывы студентов</div>
         {REVIEWS.map((element, index) => (
             <Review key={index} review={element} />
         )

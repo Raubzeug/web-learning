@@ -1,4 +1,5 @@
 import React from 'react';
+import Logopic from '../../images/logo.png'
 
 const Logo = () => (
     <a
@@ -6,7 +7,7 @@ const Logo = () => (
     href="/index.html"
     title="На главную"
     >
-        <img src={require('../../images/logo.png')} alt='logo' />
+        <img src={Logopic} alt='logo' />
     </a>
 )
 

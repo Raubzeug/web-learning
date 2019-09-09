@@ -1,13 +1,14 @@
 import React from 'react';
-import Header from './components/header/Header.js'
-import Basement from './components/basement/Basement.js'
-import ContentIndex from './components/content/ContentIndex.js'
+import Header from './components/header'
+import Footer from './components/footer'
+import ContentIndex from './components/content'
+import './styles/styles.bundle.css'
 
 const App = () => (
     <div className="body-wrapper">
       <Header />
       <ContentIndex />
-      <Basement />
+      <Footer />
     </div>
   );
 
