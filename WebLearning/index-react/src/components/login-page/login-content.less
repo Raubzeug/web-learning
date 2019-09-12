@@ -1,0 +1,46 @@
+@import "../../styles/library.less";
+
+.body-wrapper {
+    .flex-column;
+}
+
+.content {
+    .flex-column;
+
+    margin-bottom: 40px;
+
+    &__two-columns {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    &__header {
+        padding: 10px;
+        width: 100%;
+        flex-grow: 1;
+        font-size: @font-size-headers;
+        font-weight: bold;
+
+        &_gradient {
+            padding: 10px 10px;
+            align-self: stretch;
+            font-size: @font-size-headers;
+            font-weight: bold;
+            background: linear-gradient(45deg, @violet, @base_color);
+
+        @media @desktop {
+                padding: 50px 10px;
+            }
+        }
+    }
+}
+
+
+.centered-div-padding-10 {
+    text-align: center;
+    padding: 10px;
+}
+
+.base-link {
+.non-decorated-link(@darkest_base_color)
+}

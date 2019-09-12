@@ -1,0 +1,34 @@
+@import "../../styles/library.less";
+
+
+.content {
+    .flex-column;
+
+    margin-bottom: 40px;
+
+    &__two-columns {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    &__block {
+        .flex-column;
+        flex-grow: 1;
+    }
+
+    &__header {
+        padding: 10px;
+        width: 100%;
+        flex-grow: 1;
+        font-size: @font-size-headers;
+        font-weight: bold;
+
+    }
+}
+
+.content-left-wrapper {
+    .flex-column;
+    flex-basis: 800px;
+    flex-grow: 1;
+}
+

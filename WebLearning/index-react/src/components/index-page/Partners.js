@@ -1,10 +1,14 @@
 import React from 'react';
 import Company from './Company.js'
+import './partners.less'
+import Wolf from '../../images/wolf.png'
+import Rabbit from '../../images/rabbit.png'
+import Bear from '../../images/bear.png'
 
 const PARTNERS = [
-    {name: 'АО "Волчий софт"', img: 'wolf.png'},
-    {name: 'Государственная корпорация "Зайцы-тестировщики"', img: 'rabbit.png'},
-    {name: 'Студия "Дизайн от медведя Семена"', img: 'bear.png'}
+    {name: 'АО "Волчий софт"', img: Wolf},
+    {name: 'Государственная корпорация "Зайцы-тестировщики"', img: Rabbit},
+    {name: 'Студия "Дизайн от медведя Семена"', img: Bear}
 ]
 
 const Partners = () => (

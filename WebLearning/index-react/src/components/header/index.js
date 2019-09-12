@@ -3,6 +3,7 @@ import Logo from './Logo.js'
 import Navigation from './Navigation.js'
 import Search from './Search.js'
 import RegisterLogin from './RegisterLogin'
+import './header.less'
 
 const Header = () => (
     <nav className='header'>

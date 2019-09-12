@@ -2,9 +2,9 @@ import React from 'react';
 import Partners from './Partners.js'
 import Courses from './Courses.js';
 import Reviews from './Reviews.js'
+import './index-page.less'
 
-
-const ContentIndex = () => (
+const IndexContent = () => (
     <section className="content content__two-columns">
         <div className="content-left-wrapper">
             <div className="content__block">
@@ -20,4 +20,4 @@ const ContentIndex = () => (
     </section>
 )
 
-export default ContentIndex
+export default IndexContent

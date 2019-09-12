@@ -1,0 +1,116 @@
+@import "../../styles/library.less";
+
+.header {
+    .flex-wrap;
+    background-color: @base_color;
+    justify-content: space-between;
+
+    &__logo {
+        display: block;
+        min-width: 15%;
+    }
+    
+    &__logo img {
+        max-width: 80px;
+    }
+
+    &__right-wrapper {
+        .flex-column;  
+    }
+}
+
+.search {
+    .flex-wrap;
+    justify-content: flex-end;
+    text-align: left;
+    padding: 5px;
+
+    &__input {
+        flex-grow: 1;
+        min-width: 50px;
+        padding:4px 5px;
+        border:1px solid #ccc;
+        background:white;
+        box-shadow:inset 0 1px 2px @black-shadow-light;
+    }
+
+    &__button {
+        flex-shrink: 0;
+        padding:5px 10px;
+        margin: 5px 0;
+        font-weight:bold;
+        color:#333;
+        background:white;
+        border:none;
+        background-image: @gradient-gray;
+        box-shadow: @gray-button-shadow;
+        text-shadow:0 1px 1px white;
+        cursor: pointer;
+    }
+}
+
+.register-login {
+    .non-decorated-link(@light-black-text);
+    text-align: right;
+    padding: 5px;
+
+    img {
+        max-width: 20px;
+    }
+}
+
+.navigation {
+    .flex-wrap;
+    position: relative;
+    flex-grow: 1;
+    justify-content: space-around;
+    align-items: flex-end;
+    list-style: none;
+
+    &__button {
+        position: relative;
+        flex-grow: 1;
+        padding: 0px;
+        text-align: center;
+        background-color: @dark_base_color;
+        color: white;
+        box-shadow: @gray-button-shadow;
+    }
+
+    &__link {
+        .non-decorated-link(white);
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        }
+
+    .button--active {
+        background: @darkest_base_color;
+        color: white;
+    }
+
+    &__button:hover {
+        color: white;
+        background: @darkest_base_color;
+        transition: all .3s linear;
+    }
+
+    &__sub-menu {
+        .flex-wrap;
+        position: absolute;
+        flex-grow: 1;
+        justify-content: space-around;
+        align-items: flex-end;
+        width: 100%;
+        top: 39px;
+        left: 0px;
+        list-style: none;
+        z-index: 10;
+        display: none;
+    }
+
+    &__button:hover &__sub-menu {
+    display: block;
+    }
+}

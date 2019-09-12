@@ -1,4 +1,5 @@
 import React from 'react';
+import './course.less'
 
 const Course = ({course}) => (
     <article className="course">
@@ -11,7 +12,7 @@ const Course = ({course}) => (
         </div>
         <div className="course-content">
         <figure className="course-figure">
-            <img className="course-img" src={require("../../images/" + course.img)} alt={course.lang} />
+            <img className="course-img" src={course.img} alt={course.lang} />
             <figcaption>
                 <p>{course.caption}</p>
             </figcaption>

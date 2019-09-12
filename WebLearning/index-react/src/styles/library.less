@@ -1,3 +1,21 @@
+@import "library";
+@import (css) url(http://fonts.googleapis.com/css?family=Open+Sans&);
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: @font-size-main;
+}
+
+.body-wrapper {
+    .flex-column;
+}
+
 @desktop: ~"(min-width: 1024px)";
 
 @base_color: #bfd5e3;
@@ -16,6 +34,8 @@
 @gray-button-shadow: 0 1px 4px @black-shadow-light;
 
 @quote-background: lighten(spin(@base_color, 180), 15%); 
+
+
 
 .flex-wrap() {
     display: flex;
