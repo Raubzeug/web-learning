@@ -10,6 +10,9 @@ django-graphiql-debug-toolbar = "*"
 django = "*"
 faker = "*"
 coverage = "*"
+pytest-django = "*"
+pytest = "*"
+pytest-cov = "*"
 
 [packages]
 django = "*"
@@ -28,3 +31,4 @@ python_version = "3.7"
 
 [scripts]
 server = "python manage.py runserver"
+tests = "python manage.py test"

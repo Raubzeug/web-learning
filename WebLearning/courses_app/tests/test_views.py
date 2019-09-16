@@ -1,6 +1,6 @@
 import json
+import pytest
 
-from django.test import TestCase
 from rest_framework.request import Request
 from rest_framework.test import APIRequestFactory, APIClient
 from rest_framework import status
@@ -11,273 +11,153 @@ from ..serializers import BasicCourseSerializer, FullCourseSerializer
 
 factory = APIRequestFactory()
 
+valid = {
+    'title': 'Course_valid',
+    'description': 'Test_desc',
+    'tutor': 'Test_tutor',
+    'lessons': [],
+    'pupils': []
+}
 
-class GetAllCoursesTest(TestCase):
+invalid = {
+    'title': '',
+    'language': [],
+    'description': 'Test_desc',
+    'tutor': 'Test_tutor',
+    'lessons': [],
+    'pupils': []
+}
 
-    @classmethod
-    def setUp(self):
-        num = 10
-        lang = Language.objects.create(name='test_lang')
+@pytest.mark.django_db
+def test_view_url_exists_at_desired_location(table_with_data):
+    resp = table_with_data.get('/api/courses/')
+    assert resp.status_code == 200
 
-        pupil = CustomUser.objects.create(
-                    username = 'test',
-                    email = 'test@test.ru',
-                    password = '111111'
-                )
-        for i in range(num):
-            instance = Course.objects.create(
-                title=f'Course{i}',
-                language=Language.objects.get(id=1),
-                description=f'Test_desc{i}',
-                tutor='Test_tutor'
-            )
-            instance.pupils.add(pupil)
-        self.client = APIClient()
+@pytest.mark.django_db
+def test_get_all_courses_admin(admin_login):
+    response = admin_login.get('/api/courses/')
+    request = factory.get('/')
+    courses = Course.objects.all()
+    serializer = FullCourseSerializer(courses, many=True, context={'request': Request(request)})
+    assert response.data == serializer.data
+    assert response.status_code == status.HTTP_200_OK
 
-    def test_view_url_exists_at_desired_location(self):
-        resp = self.client.get('/api/courses/')
-        self.assertEqual(resp.status_code, 200)
+@pytest.mark.django_db
+def test_get_all_courses_user(table_with_data):
+    response = table_with_data.get('/api/courses/')
+    request = factory.get('/')
+    courses = Course.objects.all()
+    serializer = BasicCourseSerializer(courses, many=True, context={'request': Request(request)})
+    assert response.data == serializer.data
+    assert response.status_code == status.HTTP_200_OK
 
-    def test_get_all_courses_admin(self):
-        admin = CustomUser.objects.create_superuser(
-            username='admin',
-            password='admin',
-            email='admin@admin.ru'
-        )
-        self.client.force_login(admin)
-        response = self.client.get('/api/courses/')
-        request = factory.get('/')
-        courses = Course.objects.all()
-        serializer = FullCourseSerializer(courses, many=True, context={'request': Request(request)})
-        self.assertEqual(response.data, serializer.data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+@pytest.mark.django_db
+def test_create_valid_course_admin(admin_login):
+    response = admin_login.post(
+        '/api/courses/',
+        data=json.dumps(valid),
+        content_type='application/json'
+    )
+    assert response.status_code == status.HTTP_201_CREATED
 
-    def test_get_all_courses_user(self):
-        response = self.client.get('/api/courses/')
-        request = factory.get('/')
-        courses = Course.objects.all()
-        serializer = BasicCourseSerializer(courses, many=True, context={'request': Request(request)})
-        self.assertEqual(response.data, serializer.data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+@pytest.mark.django_db
+def test_create_invalid_course_admin(admin_login):
+    response = admin_login.post(
+        '/api/courses/',
+        data=json.dumps(invalid),
+        content_type='application/json'
+    )
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
+@pytest.mark.django_db
+def test_create_valid_course_user():
+    client = APIClient()
+    response = client.post(
+        '/api/courses/',
+        data=json.dumps(valid),
+        content_type='application/json'
+    )
+    assert response.status_code == status.HTTP_403_FORBIDDEN
 
-class CreateCourseTest(TestCase):
+@pytest.mark.django_db
+def test_update_valid_course_admin(admin_login):
+    response = admin_login.put(
+        '/api/courses/1/',
+        data = json.dumps(valid),
+        content_type = 'application/json'
+    )
+    assert response.status_code == status.HTTP_200_OK
 
-    @classmethod
-    def setUp(self):
-        lang = Language.objects.create(name='test_lang')
+@pytest.mark.django_db
+def test_update_invalid_course_admin(admin_login):
+    response = admin_login.put(
+        '/api/courses/1/',
+        data = json.dumps(invalid),
+        content_type = 'application/json'
+    )
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
-        self.valid = {
-            'title': 'Course1',
-            'description': 'Test_desc',
-            'tutor': 'Test_tutor',
-            'lessons': [],
-            'pupils': []
-        }
+@pytest.mark.django_db
+def test_update_valid_course_user(table_with_data):
+    client = APIClient()
+    response = client.put(
+        '/api/courses/1/',
+        data = json.dumps(valid),
+        content_type = 'application/json'
+    )
+    assert response.status_code == status.HTTP_403_FORBIDDEN
 
-        self.invalid = {
-            'title': '',
-            'language': [],
-            'description': 'Test_desc',
-            'tutor': 'Test_tutor',
-            'lessons': [],
-            'pupils': []
-        }
-        self.client = APIClient()
+@pytest.mark.django_db
+def test_update_invalid_course_user(table_with_data):
+    client = APIClient()
+    response = client.put(
+        '/api/courses/1/',
+        data = json.dumps(invalid),
+        content_type = 'application/json'
+    )
+    assert response.status_code == status.HTTP_403_FORBIDDEN
 
-    def test_create_valid_course_admin(self):
-        admin = CustomUser.objects.create_superuser(
-            username='admin',
-            password='admin',
-            email='admin@admin.ru'
-        )
-        self.client.force_login(admin)
-        response = self.client.post(
-            '/api/courses/',
-            data = json.dumps(self.valid),
-            content_type = 'application/json'
-        )
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+@pytest.mark.django_db
+def test_delete_valid_course_admin(admin_login):
+    response = admin_login.delete(
+        '/api/courses/1/',
+    )
+    assert response.status_code == status.HTTP_204_NO_CONTENT
 
-    def test_create_invalid_course_admin(self):
-        admin = CustomUser.objects.create_superuser(
-            username='admin',
-            password='admin',
-            email='admin@admin.ru'
-        )
-        self.client.force_login(admin)
-        response = self.client.post(
-            '/api/courses/',
-            data = json.dumps(self.invalid),
-            content_type = 'application/json'
-        )
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+@pytest.mark.django_db
+def test_delete_valid_course_user(table_with_data):
+    response = table_with_data.delete(
+        '/api/courses/1/',
+    )
+    assert response.status_code == status.HTTP_403_FORBIDDEN
 
-    def test_create_valid_course_user(self):
-        response = self.client.post(
-            '/api/courses/',
-            data = json.dumps(self.valid),
-            content_type = 'application/json'
-        )
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+@pytest.mark.django_db
+def test_enroll_course_authenticated(table_with_data):
+    pupil = CustomUser.objects.create(
+        username='test_enroll',
+        password='testtest',
+        email='test_enroll@test.ru'
+    )
+    table_with_data.force_login(pupil)
+    response = table_with_data.get(
+        '/api/courses/1/enroll/',
+    )
+    pupils = Course.objects.get(pk=1).pupils.all()
+    assert response.status_code == status.HTTP_200_OK
+    assert pupil in pupils
 
-    def test_create_invalid_course_user(self):
-        response = self.client.post(
-            '/api/courses/',
-            data = json.dumps(self.invalid),
-            content_type = 'application/json'
-        )
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+@pytest.mark.django_db
+def test_enroll_course_not_authenticated(table_with_data):
+    response = table_with_data.get(
+        '/api/courses/1/enroll/',
+    )
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
-
-class UpdateCourseTest(TestCase):
-
-    def setUp(self):
-        lang = Language.objects.create(name='test_lang')
-
-        pupil = CustomUser.objects.create(
-                    username = 'test',
-                    email = 'test@test.ru',
-                    password = '111111'
-                )
-        instance = Course.objects.create(
-            title='Course1',
-            language=Language.objects.get(id=1),
-            description='Test_desc',
-            tutor='Test_tutor'
-        )
-        instance.pupils.add(pupil)
-
-        self.valid = {
-            'title': 'Course2',
-            'description': 'Test_desc2',
-            'tutor': 'Test_tutor2',
-            'lessons': [],
-            'pupils': []
-        }
-
-        self.invalid = {
-            'title': '',
-            'description': 'Test_desc2',
-            'tutor': 'Test_tutor2',
-            'lessons': [],
-            'pupils': []
-        }
-        self.client = APIClient()
-
-    def test_update_valid_course_admin(self):
-        admin = CustomUser.objects.create_superuser(
-            username='admin',
-            password='admin',
-            email='admin@admin.ru'
-        )
-        self.client.force_login(admin)
-        response = self.client.put(
-            '/api/courses/1/',
-            data = json.dumps(self.valid),
-            content_type = 'application/json'
-        )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    def test_update_invalid_course_admin(self):
-        admin = CustomUser.objects.create_superuser(
-            username='admin',
-            password='admin',
-            email='admin@admin.ru'
-        )
-        self.client.force_login(admin)
-        response = self.client.put(
-            '/api/courses/1/',
-            data = json.dumps(self.invalid),
-            content_type = 'application/json'
-        )
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-    def test_update_valid_course_user(self):
-        response = self.client.put(
-            '/api/courses/1/',
-            data = json.dumps(self.valid),
-            content_type = 'application/json'
-        )
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
-    def test_update_invalid_course_user(self):
-        response = self.client.put(
-            '/api/courses/1/',
-            data = json.dumps(self.invalid),
-            content_type = 'application/json'
-        )
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
-
-class DeleteCourseTest(TestCase):
-
-    def setUp(self):
-        self.course = Course.objects.create(
-            title='Course1',
-            language=None,
-            description='Test_desc',
-            tutor='Test_tutor'
-        )
-        self.client = APIClient()
-
-    def test_delete_valid_course_admin(self):
-        admin = CustomUser.objects.create_superuser(
-            username='admin',
-            password='admin',
-            email='admin@admin.ru'
-        )
-        self.client.force_login(admin)
-        response = self.client.delete(
-            '/api/courses/1/',
-        )
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-
-    def test_delete_valid_course_user(self):
-        response = self.client.delete(
-            '/api/courses/1/',
-        )
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
-class EnrollCourseTest(TestCase):
-
-    def setUp(self):
-        self.course = Course.objects.create(
-            title='Course1',
-            language=None,
-            description='Test_desc',
-            tutor='Test_tutor',
-        )
-        self.client = APIClient()
-
-    def test_enroll_course_authenticated(self):
-        pupil = CustomUser.objects.create(
-            username='test',
-            password='testtest',
-            email='test@test.ru'
-        )
-        self.client.force_login(pupil)
-        response = self.client.get(
-            '/api/courses/1/enroll/',
-        )
-        pupils = self.course.pupils.all()
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertTrue(pupil in pupils)
-
-    def test_enroll_course_not_authenticated(self):
-        response = self.client.get(
-            '/api/courses/1/enroll/',
-        )
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-
-    def test_enroll_invalid_course_authenticated(self):
-        pupil = CustomUser.objects.create(
-            username='test',
-            password='testtest',
-            email='test@test.ru'
-        )
-        self.client.force_login(pupil)
-        response = self.client.get(
-            '/api/courses/2/enroll/',
-        )
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+@pytest.mark.django_db
+def test_enroll_invalid_course_authenticated(table_with_data):
+    pupil = CustomUser.objects.get(pk=1)
+    table_with_data.force_login(pupil)
+    response = table_with_data.get(
+        '/api/courses/2/enroll/',
+    )
+    assert response.status_code == status.HTTP_404_NOT_FOUND

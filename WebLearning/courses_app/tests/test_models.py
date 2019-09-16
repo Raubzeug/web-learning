@@ -1,99 +1,72 @@
-from django.test import TestCase
+import pytest
 from ..models import Language, Course, Lesson
-from account_app.models import CustomUser
 
-class LanguageTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        Language.objects.create(name = 'Pascal')
+@pytest.mark.django_db
+def test_lang_label(table_with_data):
+    lang = Language.objects.get(id=1)
+    label = lang._meta.get_field('name').verbose_name
+    assert label == 'name'
 
-    def test_lang_label(self):
-        lang = Language.objects.get(id=1)
-        label = lang._meta.get_field('name').verbose_name
-        self.assertEqual(label, 'name')
+@pytest.mark.django_db
+def test_lang_str(table_with_data):
+    lang = Language.objects.get(id=1)
+    assert str(lang) == 'test_lang'
 
-    def test_str(self):
-        lang = Language.objects.get(id=1)
-        self.assertEqual(str(lang), 'Pascal')
+@pytest.mark.django_db
+def test_course_label(table_with_data):
+    course = Course.objects.get(id=1)
+    label = course._meta.get_field('title').verbose_name
+    assert label == 'title'
 
-class CourseTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        course = Course.objects.create(
-            title = 'Course',
-            language = Language.objects.create(name = 'test_lang'),
-            description = 'Test_desc',
-            tutor = 'Test_tutor'
-        )
-        lesson = Lesson.objects.create(
-                    course = Course.objects.get(pk=1),
-                    title='test_lesson',
-                    description='Test_desc',
-                    data='2019-07-29'
-                    )
-        course.lessons.add(lesson)
+@pytest.mark.django_db
+def test_course_lang(table_with_data):
+    course = Course.objects.get(id=1)
+    language = course._meta.get_field('language').verbose_name
+    assert language == 'language'
 
-    def test_course_label(self):
-        course = Course.objects.get(id=1)
-        label = course._meta.get_field('title').verbose_name
-        self.assertEqual(label, 'title')
+@pytest.mark.django_db
+def test_course_desc(table_with_data):
+    course = Course.objects.get(id=1)
+    description = course._meta.get_field('description').verbose_name
+    assert description == 'description'
 
-    def test_course_lang(self):
-        course = Course.objects.get(id=1)
-        language = course._meta.get_field('language').verbose_name
-        self.assertEqual(language, 'language')
+@pytest.mark.django_db
+def test_course_lessons(table_with_data):
+    course = Course.objects.get(id=1)
+    lessons = course._meta.get_field('lessons').related_name
+    assert lessons == 'lessons'
 
-    def test_course_desc(self):
-        course = Course.objects.get(id=1)
-        description = course._meta.get_field('description').verbose_name
-        self.assertEqual(description, 'description')
+@pytest.mark.django_db
+def test_course_tutor(table_with_data):
+    course = Course.objects.get(id=1)
+    language = course._meta.get_field('tutor').verbose_name
+    assert language == 'tutor'
 
-    def test_course_lessons(self):
-        course = Course.objects.get(id=1)
-        lessons = course._meta.get_field('lessons').related_name
-        self.assertEqual(lessons, 'lessons')
+@pytest.mark.django_db
+def test_course_str(table_with_data):
+    course = Course.objects.get(id=1)
+    assert str(course) == '"Course1"'
 
-    def test_course_tutor(self):
-        course = Course.objects.get(id=1)
-        language = course._meta.get_field('tutor').verbose_name
-        self.assertEqual(language, 'tutor')
+@pytest.mark.django_db
+def test_lesson_label(table_with_data):
+    lesson = Lesson.objects.get(id=1)
+    label = lesson._meta.get_field('title').verbose_name
+    assert label == 'title'
 
-    def test_str(self):
-        course = Course.objects.get(id=1)
-        self.assertEqual(str(course), '"Course"')
+@pytest.mark.django_db
+def test_lesson_desc(table_with_data):
+    lesson = Lesson.objects.get(id=1)
+    description = lesson._meta.get_field('description').verbose_name
+    assert description == 'description'
 
+@pytest.mark.django_db
+def test_lesson_data(table_with_data):
+    lesson = Lesson.objects.get(id=1)
+    data = lesson._meta.get_field('data').verbose_name
+    assert data == 'data'
 
-class LessonTest(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        Lesson.objects.create(
-            course = Course.objects.create(
-                title = 'Course',
-                description = 'Test_desc',
-                tutor = 'Test_tutor'
-                ),
-            title='test_lesson',
-            description='Test_desc',
-            data='2019-07-29'
-        )
-
-    def test_lesson_label(self):
-        lesson = Lesson.objects.get(id=1)
-        label = lesson._meta.get_field('title').verbose_name
-        self.assertEqual(label, 'title')
-
-    def test_lesson_desc(self):
-        lesson = Lesson.objects.get(id=1)
-        description = lesson._meta.get_field('description').verbose_name
-        self.assertEqual(description, 'description')
-
-    def test_lesson_data(self):
-        lesson = Lesson.objects.get(id=1)
-        data = lesson._meta.get_field('data').verbose_name
-        self.assertEqual(data, 'data')
-
-    def test_lesson_course(self):
-        lesson = Lesson.objects.get(id=1)
-        course = lesson._meta.get_field('course').verbose_name
-        self.assertEqual(course, 'course')
+@pytest.mark.django_db
+def test_lesson_course(table_with_data):
+    lesson = Lesson.objects.get(id=1)
+    course = lesson._meta.get_field('course').verbose_name
+    assert course == 'course'

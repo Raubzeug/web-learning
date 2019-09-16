@@ -4,6 +4,7 @@
 **/playground
 **/node_modules
 **/server.js
+**/htmlcov
 
 # app bundle
 **/output/

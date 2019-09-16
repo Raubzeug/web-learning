@@ -3,7 +3,12 @@
  source = .
  omit =
      */environment/*
-     */migrations/*
-      */gql_web_learning/*
-      */management/*
-      manage.py
+     */migrations/*,
+     *settings*,
+     *tests/*,
+     *wsgi/*,
+     *wsgi.py,
+     *rq_test.py,
+     */gql_web_learning/*
+     */management/*
+     manage.py
