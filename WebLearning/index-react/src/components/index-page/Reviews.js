@@ -1,6 +1,5 @@
 import React from 'react';
 import Review from './Review.js'
-import './reviews.less'
 
 const REVIEWS = [
     {text: 'Супер!', author: 'Елена'},

@@ -1,6 +1,5 @@
 import React from 'react';
 import Course from './Course.js'
-import './courses.less'
 import Pic1 from '../../images/python-1.png'
 import Pic2 from '../../images/css-1.png'
 

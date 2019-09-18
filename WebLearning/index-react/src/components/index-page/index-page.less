@@ -32,3 +32,125 @@
     flex-grow: 1;
 }
 
+.course {
+    .flex-column;
+    margin: 10px;
+    padding: 10px;
+    flex-basis: 300px;
+    max-width: 400px;
+    flex-grow: 1;
+
+    &-meta {
+        display: flex;
+    }
+
+    &-img {
+        max-width: 100px;
+        margin: 10px 0;
+    }
+
+    &-content {
+        .flex-column;
+        flex-grow: 1;
+        
+    }
+
+    &-figure {
+        text-align: center;
+        padding-bottom: 10px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    &-figure p {
+        text-align: left;
+    }
+
+    &-info-button {
+        .non-decorated-link(@light-black-text);
+        display: block;
+        margin-top: auto;
+        flex-shrink: 0;
+        padding:5px 10px;
+        text-align: center;
+        font-size: 0.8em;
+        font-weight:bold;
+        background:white;
+        border:none;
+        background-image: @gradient-gray;
+        box-shadow: @gray-button-shadow;
+        text-shadow:0 1px 1px white;
+        cursor: pointer;
+    }
+}
+
+.courses {
+    .flex-wrap;
+    justify-content: space-around;
+    flex-grow: 1;
+}
+
+.content-right-wrapper {
+    .flex-wrap;
+    flex-basis: 100px;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: @base_color;
+    margin-top: 20px;
+    margin-bottom: auto;
+}
+
+.company {
+    display: flex;
+    max-width: 200px;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+
+    &-logo img {
+        max-width: 60px;
+
+    }
+}
+
+.feedback__block {
+    .flex-wrap;
+}
+
+.review {
+    vertical-align: top;
+    background-color: white;
+    display: inline-block;
+    padding: 1%;
+
+    &__blockquote {
+        margin: 0;
+        color: @light-black-text;
+        padding: 10px 40px;
+        border-left: 8px solid @base_color;
+        position: relative;
+        background: @quote-background;
+
+        &:before{
+            content: "\201C";
+            color: @base_color;
+            font-size: @font-size-main * 3;
+            position: absolute;
+            left: 10px;
+            top: 0;
+        }
+
+        &_content {
+            font-style: italic;
+            margin-top: 0;
+        }
+
+        &_footer {
+            font-style: italic;
+            margin-top: 0;
+            text-align: right;
+        }
+    }
+}

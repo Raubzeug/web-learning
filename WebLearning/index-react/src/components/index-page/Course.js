@@ -1,5 +1,4 @@
 import React from 'react';
-import './course.less'
 
 const Course = ({course}) => (
     <article className="course">

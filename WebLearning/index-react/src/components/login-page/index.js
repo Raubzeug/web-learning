@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router'
 import LoginForm from './LoginForm'
 import {getCookie} from '../../js/getCookie'
 import './login-content.less'
@@ -7,11 +8,11 @@ import './login-content.less'
 class LoginContent extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {success: '', error: '', errors: []}
+        this.state = {success: '', error: '', errors: [], redirect: false}
         this.submitForm = this.submitForm.bind(this)
     }
     
-    submitForm(eventData) {
+    submitForm = (eventData) => {
         this.setState({success: '', error: '', errors: []})
         const headers = {
             'Content-Type': 'application/json',
@@ -29,7 +30,8 @@ class LoginContent extends React.Component {
                 .then(data => {
                     if ('token' in data) {
                         this.setState({
-                            success: 'You are sucessfully logged in!'
+                            success: 'You are sucessfully logged in!',
+                            redirect: true
                         })
                     }
                     else {
@@ -48,23 +50,34 @@ class LoginContent extends React.Component {
                 .catch(err => console.error(err))        
     }
 
-    render() {
-        return (
-        <section className="content">
-            <div className="content__header_gradient">
-                    <span>Войти в личный кабинет</span>
-            </div>
-            <div className='centered-div-padding-10'>
-                Не зарегистрированы?<br/>
-                <a className='base-link' href='./registration'>Зарегистрироваться</a>
-            </div>
-            <LoginForm submit={this.submitForm} success={this.state.success} errors={this.state.errors} />
-            <div className='centered-div-padding-10'>
-                Забыли пароль?<br/>
-                <a className='base-link' href='/'>Восстановление пароля</a>
-            </div>
-        </section>
-    )}
+    render = () => {
+        const redirect = this.state.redirect
+        if (redirect) {
+            return (
+                <Redirect to={{
+                    pathname: "/profile",
+                    state: { username: this.state.success }
+             }} />
+            )
+        }
+        else {
+            return (
+                <section className="content">
+                    <div className="content__header_gradient">
+                            <span>Войти в личный кабинет</span>
+                    </div>
+                    <div className='centered-div-padding-10'>
+                        Не зарегистрированы?<br/>
+                        <a className='base-link' href='./registration'>Зарегистрироваться</a>
+                    </div>
+                    <LoginForm submit={this.submitForm} success={this.state.success}
+                             errors={this.state.errors} />
+                    <div className='centered-div-padding-10'>
+                        Забыли пароль?<br/>
+                        <a className='base-link' href='/'>Восстановление пароля</a>
+                    </div>
+                </section>
+    )}}
 }
 
 export default LoginContent

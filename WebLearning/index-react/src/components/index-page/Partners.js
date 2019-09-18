@@ -1,6 +1,5 @@
 import React from 'react';
 import Company from './Company.js'
-import './partners.less'
 import Wolf from '../../images/wolf.png'
 import Rabbit from '../../images/rabbit.png'
 import Bear from '../../images/bear.png'

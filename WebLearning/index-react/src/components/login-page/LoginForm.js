@@ -1,5 +1,5 @@
 import React from 'react';
-import './login-form.less'
+import Message from '../Message'
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -9,15 +9,17 @@ class LoginForm extends React.Component {
         this.submitForm = this.submitForm.bind(this)
     }
 
-    validateForm() {
-        return this.state.username.length > 3 && this.state.password.length > 3
-    }
+    validateForm = () => (
+        this.state.username.length > 3 && this.state.password.length > 3
+    )
 
-    handleChange = event => {
-        this.setState({
-            [event.target.id]: event.target.value
-        })
-    }
+    // handleChange = event => {
+    //     this.setState({
+    //         [event.target.id]: event.target.value
+    //     })
+    // }
+
+    handleChange = ({target: {name, value}}) => this.setState({ [name]: value })
 
     submitForm = event => {
         event.preventDefault()
@@ -27,20 +29,19 @@ class LoginForm extends React.Component {
         })
     }
 
-    render() {
-        return (
+    render = () => (
         <form className='login-form' method="POST" name='login' 
         autoComplete="on" onSubmit={this.submitForm}>
             <label className='login-form__label'>
                 Логин:
                 <input className='login-form__input' type='text' name='username' 
-                id='username' required autoFocus 
+                required autoFocus 
                 value={this.state.username} onChange={this.handleChange}/>
             </label>
             <label className='login-form__label'>
                 Пароль:
                 <input className='login-form__input' type='password' 
-                name='password' id='password' required
+                name='password' required
                 value={this.state.password} onChange={this.handleChange} />
             </label>
 
@@ -48,13 +49,8 @@ class LoginForm extends React.Component {
                 <input className='login-form__submit' type="submit" value="Войти"
                 disabled={!this.validateForm()} />
             </div>
-            {(this.props.success && <div className='message--green'>{this.props.success}</div>)}
-            {this.props.errors && 
-                <div className='message--red'>
-                    {this.props.errors.map(item => <span key={item}>{item}</span>)}
-                </div>}
+            <Message success={this.props.success} errors={this.props.errors}/>
         </form>)
-    }
 }
 
 export default LoginForm

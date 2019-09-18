@@ -1,9 +1,13 @@
 import json
+import uuid
+
+from django.db import models
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect
+from rest_framework import serializers
 
 from account_app.models import CustomUser as User
 from rest_framework import viewsets, generics, status
@@ -15,7 +19,7 @@ from rest_framework.permissions import IsAdminUser
 from .serializers import UserSerializer, GroupSerializer, RegistrationSerializer, LoginSerializer, LogoutSerializer
 
 
-def verify(request, uuid):
+def verify(request, uuid, random_digit):
     try:
         user = User.objects.get(verification_uuid=uuid, email_confirmed=False)
     except User.DoesNotExist:
@@ -89,10 +93,28 @@ class LogoutView(APIView):
 
 
 class UserDetailsView(APIView):
+    serializer_class = UserSerializer
+
     def get(self, request):
         request.auth
         user = request.user
         if not user or not user.id:
-            return Response({'message': 'you are not logged in'})
+            return Response({'message': 'you are not logged in'}, status=401)
         serializer = UserSerializer(user, context={'request': request})
+        return Response(serializer.data)
+
+    def put(self, request):
+        request.auth
+        user = request.user
+        if not user or not user.id:
+            return Response({'message': 'you are not logged in'})
+        serializer = UserSerializer(user, data=request.data, context={'request': request}, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            if request.data.get('email') != None and request.data.get('email') != user.email:
+                existing = User.objects.filter(email=request.data.get('email')).first()
+                if existing:
+                    raise serializers.ValidationError('Someone with this email was already registered')
+                user.email_confirmed = False
+                logout(request)
+            serializer.save()
         return Response(serializer.data)

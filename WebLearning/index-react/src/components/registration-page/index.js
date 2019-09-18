@@ -25,9 +25,16 @@ class RegistrationContent extends React.Component {
             body: JSON.stringify(eventData),
             })
             .then(response => {
+                if (response.status === 201) {
+                    this.setState({success: true})
+                }
+                else {
+                    this.setState({success: false})
+                }
                 return response.json()})
                 .then(data => {
-                    if ('username' in data) {
+                    console.log(data)
+                    if (this.state.success) {
                         this.setState({
                             success: 'You are sucessfully register! Check your mail for verification link.'
                         })

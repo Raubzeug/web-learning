@@ -1,5 +1,4 @@
 import React from 'react';
-import './company.less'
 
 const Company = ({name, img}) => (
     <div className="company">
