@@ -25,6 +25,7 @@ rq = "*"
 django-rq = "*"
 rq-scheduler = "*"
 django-cors-headers = "*"
+influxdb = "*"
 
 [requires]
 python_version = "3.7"

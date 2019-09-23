@@ -7,17 +7,24 @@ import LoginContent from './components/login-page'
 import RegistrationContent from './components/registration-page'
 import UserProfile from './components/user-profile'
 
-const App = () => (
-  <div className="body-wrapper">
-    <Header />
-    <Switch>
-      <Route exact path="/" component={IndexContent} />
-      <Route exact path="/login" component={LoginContent} />
-      <Route exact path="/registration" component={RegistrationContent} />
-      <Route exact path="/profile" component={UserProfile} />
-    </Switch>
-    <Footer />
-  </div>
-  );
+class App extends React.Component {
+ 
+  componentDidMount = () => {
+    console.log('did mount')
+  }
+  
+  render = () => (
+    <div className="body-wrapper">
+      <Header />
+      <Switch>
+        <Route exact path="/" component={IndexContent} />
+        <Route exact path="/login" component={LoginContent} />
+        <Route exact path="/registration" component={RegistrationContent} />
+        <Route exact path="/profile" component={UserProfile} />
+      </Switch>
+      <Footer />
+    </div>
+  )
+};
 
 export default App;
