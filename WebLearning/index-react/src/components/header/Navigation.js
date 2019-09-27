@@ -3,7 +3,7 @@ import NavButton from './NavButton.js';
 
 const LINKS = [
     {link: '/', linkName: 'HOME'},
-    {link: '/about.html', linkName: 'ABOUT US'},
+    {link: '/about', linkName: 'ABOUT US'},
     {link: '/courses.html', linkName: 'COURSES', children: [
             {link: '/schedule.html', linkName: 'SCHEDULE'}
         ]

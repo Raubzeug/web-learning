@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from "react-redux";
+import store from "./js/store";
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -9,9 +11,11 @@ import { BrowserRouter } from 'react-router-dom';
 // ReactDOM.render(<App />, document.getElementById('root'));
 
 ReactDOM.render((
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   ), document.getElementById('root'))
 
 
@@ -19,3 +23,4 @@ ReactDOM.render((
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+

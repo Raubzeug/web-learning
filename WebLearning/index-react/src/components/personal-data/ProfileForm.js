@@ -1,24 +1,24 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './user-profile.less'
-import {getCookie} from '../../js/getCookie'
 import Message from '../Message'
 
-class ProfileForm extends React.Component {
+import { connect } from 'react-redux'
+import { getUserInfo } from '../../js/actions/'
+import {Link} from 'react-router-dom'
+
+export class ProfileForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             username: '',
-            prev_email: '',
             email: '',
             first_name: '', 
             last_name: '',
-            logged: false,
             upd_user_data: false,
             startDate: new Date(1986,8,19),
         }
-        this.getProfile = this.getProfile.bind(this)
+
         this.validateForm = this.validateForm.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.submitForm = this.submitForm.bind(this)
@@ -26,18 +26,26 @@ class ProfileForm extends React.Component {
     }
 
     validateForm = () => (
-        this.state.username.length > 3 && this.state.email.includes('@')
+        (this.state.username || this.state.email || this.state.last_name || this.state.first_name) &&
+        (!this.state.username || this.state.username.length > 3) &&
+        (!this.state.email || this.state.email.includes('@'))
     )
 
     componentDidMount = () => {
-        this.getProfile()
+        this.props.getUserInfo()        
     }
 
-    componentDidUpdate = () => {
+    shouldComponentUpdate = () => {
         if (this.state.upd_user_data) {
-            this.getProfile()
-            this.setState({upd_user_data: false})
+            this.props.getUserInfo()
+            this.setState({
+                username: '',
+                email: '',
+                first_name: '', 
+                last_name: '',
+                upd_user_data: false})
         }
+        return true
     }
 
     handleChange = ({target: {name, value}}) => this.setState({ [name]: value })
@@ -48,44 +56,6 @@ class ProfileForm extends React.Component {
         })
       )
 
-    getProfile = () => {
-        const headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken'),
-            }
-        fetch('/api/auth/user/', {
-            method: 'GET',
-            headers: headers,
-            credentials: 'include',
-            })
-            .then(response => {
-                if (response.status === 401) {
-                    this.setState({
-                        logged: false
-                    })
-                }
-                else {
-                    this.setState({
-                        logged: true
-                    })
-                }
-                return response.json()
-                })
-            .then(data => {
-                if (this.state.logged === true) {
-                    this.setState({
-                        username: data.username,
-                        email: data.email,
-                        prev_email: data.email,
-                        first_name: data.first_name, 
-                        last_name: data.last_name
-                    })
-                    }
-                })
-            .catch(err => console.error(err))
-    }
-
     submitForm = event => {
         event.preventDefault()
         
@@ -95,50 +65,50 @@ class ProfileForm extends React.Component {
             alert('You must be older then 16 years old!')
         }
 
-        if (this.state.prev_email !== this.state.email) {
+        if (this.state.email && this.props.user_info.email !== this.state.email) {
             const result = window.confirm('При измененнии электронной почты,' + 
                 'будет осуществлен выход из личного кабинета. Вы уверены?')
             if (!result) {
-                   this.setState({upd_user_data: true})
+                //    this.setState({email: ''})
                    return false
                 }
             }
         this.props.submit({
-            username: this.state.username,
-            email: this.state.email,
-            first_name: this.state.first_name,
-            last_name: this.state.last_name
+            username: this.state.username || this.props.user_info.username,
+            email: this.state.email || this.props.user_info.email,
+            first_name: this.state.first_name || this.props.user_info.first_name,
+            last_name: this.state.last_name || this.props.user_info.last_name
         })
         this.setState({upd_user_data: true})
     }
 
     render = () => {
-        if (!this.state.logged) {
+        if (!this.props.logged_in) {
             return <div className='centered-div-padding-10'>You are not logged in!</div>
         }
         else {
             return <div>
                 <form className='profile-form' method="PUT" name='profile'>
                     <label className='profile-form__label'>
-                        Логин:
+                        Логин: <b>{this.props.user_info.username}</b>
                         <input className='profile-form__input' type='text' name='username' 
                                 required onChange={this.handleChange}
                                 value={this.state.username} />
                     </label>
                     <label className='profile-form__label'>
-                        Емейл:
+                        Емейл: <b>{this.props.user_info.email}</b>
                         <input className='profile-form__input' type='email' 
                         name='email' required onChange={this.handleChange}
                         value={this.state.email} />
                     </label>
                     <label className='profile-form__label'>
-                        Имя:
+                        Имя: <b>{this.props.user_info.first_name}</b>
                         <input className='profile-form__input' type='text' 
                         name='first_name' onChange={this.handleChange}
                         value={this.state.first_name} />
                     </label>
                     <label className='profile-form__label'>
-                        Фамилия:
+                        Фамилия: <b>{this.props.user_info.last_name}</b>
                         <input className='profile-form__input' type='text' 
                         name='last_name' onChange={this.handleChange}
                         value={this.state.last_name} />
@@ -161,11 +131,21 @@ class ProfileForm extends React.Component {
                     <Message success={this.props.success} errors={this.props.errors}/>
                 </form>
                 <div className='centered-div-padding-10'>
-                    <a className='base-link' href='/'>Выйти из профиля</a>
+                    <Link className='base-link' to='/'>Выйти из профиля</Link>
                 </div>
             </div>
         }
     }
 }
 
-export default ProfileForm
+function mapStateToProps(state) {
+    return {
+      user_info: state.user_info,
+      logged_in: state.logged_in
+    };
+  }
+
+export default connect(
+    mapStateToProps,
+    { getUserInfo }
+)(ProfileForm)

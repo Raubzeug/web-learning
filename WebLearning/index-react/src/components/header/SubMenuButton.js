@@ -1,8 +1,9 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom'
+ 
 const SubMenuButton = ({link, linkName}) => (
     <li className='navigation__button'>
-        <a className="navigation__link" href={link}>{linkName}</a>
+        <Link className="navigation__link" to={link}>{linkName}</Link>
     </li>
 )
 

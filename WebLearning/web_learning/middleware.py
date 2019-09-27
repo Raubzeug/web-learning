@@ -1,6 +1,7 @@
 import datetime
 import uuid
 
+import requests
 from influxdb import InfluxDBClient
 
 class RequestTimeMiddleware(object):
@@ -37,18 +38,21 @@ class RequestTimeMiddleware(object):
             message,
         )
         if influx and tag == 'response':
-            client = InfluxDBClient(database='otus')
-            json_data = [{
-                'measurement': 'request_duration',
-                'tags': {
-                    'server': 'localhost',
-                    'path': request.path,
-                    'size': size,
-                    'status': status,
-                },
-                'fields': {
-                    'uuid': str(request._logging_uuid),
-                    'duration': req_duration,
-                }
-            }]
-            client.write_points(json_data)
+            try:
+                client = InfluxDBClient(database='otus')
+                json_data = [{
+                    'measurement': 'request_duration',
+                    'tags': {
+                        'server': 'localhost',
+                        'path': request.path,
+                        'size': size,
+                        'status': status,
+                    },
+                    'fields': {
+                        'uuid': str(request._logging_uuid),
+                        'duration': req_duration,
+                    }
+                }]
+                client.write_points(json_data)
+            except requests.exceptions.ConnectionError as err:
+                print(err)

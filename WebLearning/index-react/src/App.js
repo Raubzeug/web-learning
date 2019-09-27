@@ -10,7 +10,7 @@ import UserProfile from './components/user-profile'
 class App extends React.Component {
  
   componentDidMount = () => {
-    console.log('did mount')
+    // console.log('here', this.props.user_info)
   }
   
   render = () => (
@@ -27,4 +27,4 @@ class App extends React.Component {
   )
 };
 
-export default App;
+export default App

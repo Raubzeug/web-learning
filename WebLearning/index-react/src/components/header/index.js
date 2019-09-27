@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from './Logo.js'
 import Navigation from './Navigation.js'
 import Search from './Search.js'
-import RegisterLogin from './RegisterLogin'
+import UserControls from '../user-controls'
 import './header.less'
 
 const Header = () => (
@@ -11,7 +11,7 @@ const Header = () => (
         <Navigation />
         <div className='header__right-wrapper'>
             <Search />
-            <RegisterLogin />
+            <UserControls />
         </div>
     </nav>
 )

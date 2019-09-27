@@ -1,63 +1,56 @@
 import React from 'react';
 import './user-profile.less'
-import {getCookie} from '../../js/getCookie'
-import ProfileForm from './ProfileForm'
+import PersonalData from '../personal-data'
+import PersonalSchedule from '../personal-schedule'
+import PersonalStatement from '../personal-statement'
+
 
 class UserProfile extends React.Component {
+
     constructor(props) {
         super(props)
-        this.state = {success: '', error: '', errors: [], applied: false}
-        this.submitForm = this.submitForm.bind(this)
+        this.state = {
+            showPrivat: true,
+            showSchedule: false,
+            is_tutor: localStorage.is_tutor
+        }
+        this.selectPrivat = this.selectPrivat.bind(this)
+        this.selectSchedule = this.selectSchedule.bind(this)
     }
 
-    submitForm = event => {
-        this.setState({success: '', error: '', errors: [], applied: false})
-        const headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken'),
-            }
-        fetch('/api/auth/user/', {
-            method: 'PUT',
-            headers: headers,
-            credentials: 'include',
-            body: JSON.stringify(event),
-            })
-            .then(response => {
-                if (response.status === 200) {
-                    this.setState({
-                        success: 'Changes have been applied',
-                        applied: true,
-                    })
-                }
-                return response.json()})
-                .then(data => {
-                    if (!this.state.applied) {
-                        for (var elem in data) {
-                            this.setState({error: data[elem]})
-                            this.setState(state => {
-                                const errors = state.errors.concat(state.error)
-                                return {
-                                    errors,
-                                    error: ''
-                                }
-                            })
-                        }
-                        }
-                })
-                .catch(err => console.error(err))        
+    selectPrivat = () => {
+        !this.state.showPrivat && this.setState({
+            showPrivat: !this.state.showPrivat,
+            showSchedule: !this.state.showSchedule
+        })
+    }
+
+    selectSchedule = () => {
+        !this.state.showSchedule && this.setState({
+            showSchedule: !this.state.showSchedule,
+            showPrivat: !this.state.showPrivat     
+        })
     }
 
     render = () => (
-                <section className="content">
-                    <div className="content__header_gradient">
-                            <span>Личный кабинет</span>
-                    </div>
-                    <ProfileForm submit={this.submitForm} success={this.state.success}
-                             errors={this.state.errors}/>
-                    
-                </section>
-            )
+        <section className="content">
+            <div className="content__header_gradient">
+                    <span>Личный кабинет</span>
+            </div>
+            <div className="content__submenu">
+                    <span className='content__submenu_button' onClick={this.selectPrivat}>
+                        Мой профиль
+                    </span>
+                    <span className='content__submenu_button' onClick={this.selectSchedule}>
+                        {this.state.is_tutor && 'Ведомость учеников'}
+                        {!this.state.is_tutor && 'Мое расписание'}
+                    </span>
+            </div>
+            {this.state.showPrivat && <PersonalData />}
+            {!this.state.is_tutor && this.state.showSchedule && <PersonalSchedule />}
+            {this.state.is_tutor && this.state.showSchedule && <PersonalStatement />}
+        </section>
+    )
 }
 
 export default UserProfile

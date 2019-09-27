@@ -1,7 +1,8 @@
 import React from 'react';
 import RegistrationForm from './RegistrationForm'
-import {getCookie} from '../../js/getCookie'
+import getCookie from '../../js/getCookie'
 import './registration-content.less'
+import {Link} from 'react-router-dom'
 
 
 class RegistrationContent extends React.Component {
@@ -33,7 +34,6 @@ class RegistrationContent extends React.Component {
                 }
                 return response.json()})
                 .then(data => {
-                    console.log(data)
                     if (this.state.success) {
                         this.setState({
                             success: 'You are sucessfully register! Check your mail for verification link.'
@@ -63,7 +63,7 @@ class RegistrationContent extends React.Component {
             </div>
             <div className='centered-div-padding-10'>
                 Уже зарегистрированы?<br/>
-                <a className='base-link' href='./login'>Войти</a>
+                <Link className='base-link' to='./login'>Войти</Link>
             </div>
             <RegistrationForm submit={this.submitForm} success={this.state.success} errors={this.state.errors} />
             
