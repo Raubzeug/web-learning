@@ -1,4 +1,5 @@
 import React from 'react';
+import './search.less'
 
 const Search = () => (
     <div className="search">

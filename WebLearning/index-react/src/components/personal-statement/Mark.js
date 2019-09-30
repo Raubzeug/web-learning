@@ -7,8 +7,6 @@ class Mark extends React.Component {
         this.state = {
             mark: ''
         }
-        this.handleChange = this.handleChange.bind(this)
-        this.submitForm = this.submitForm.bind(this)
     }
 
     handleChange = ({target: {name, value}}) => this.setState({ [name]: value })

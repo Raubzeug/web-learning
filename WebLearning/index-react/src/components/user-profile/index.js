@@ -14,8 +14,6 @@ class UserProfile extends React.Component {
             showSchedule: false,
             is_tutor: localStorage.is_tutor
         }
-        this.selectPrivat = this.selectPrivat.bind(this)
-        this.selectSchedule = this.selectSchedule.bind(this)
     }
 
     selectPrivat = () => {

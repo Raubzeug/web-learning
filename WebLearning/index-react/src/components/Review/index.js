@@ -1,4 +1,5 @@
 import React from 'react';
+import './review.less'
 
 const Review = ({review}) => (
     <div className="review">

@@ -13,7 +13,6 @@ class LoginContent extends React.Component {
     constructor(props) {
         super(props)
         this.state = {success: '', error: '', errors: [], redirect: false}
-        this.submitForm = this.submitForm.bind(this)
     }
     
     submitForm = (eventData) => {

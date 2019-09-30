@@ -14,8 +14,6 @@ class Schedule extends React.Component {
             search: '',
             permission: false
         }
-        this.submitForm = this.submitForm.bind(this)
-        this.dataSearch = this.dataSearch.bind(this)
     }
 
     submitForm = (event, eventData) => {

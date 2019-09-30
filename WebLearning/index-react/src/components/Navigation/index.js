@@ -1,5 +1,6 @@
 import React from 'react';
-import NavButton from './NavButton.js';
+import NavButton from '../NavButton';
+import './navigation.less'
 
 const LINKS = [
     {link: '/', linkName: 'HOME'},

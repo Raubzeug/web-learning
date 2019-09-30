@@ -5,8 +5,6 @@ class LoginForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {username: '', password: ''}
-        this.handleChange = this.handleChange.bind(this)
-        this.submitForm = this.submitForm.bind(this)
     }
 
     validateForm = () => (

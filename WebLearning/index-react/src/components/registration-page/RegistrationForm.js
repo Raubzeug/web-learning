@@ -6,8 +6,6 @@ class RegistrationForm extends React.Component {
         super(props)
         this.state = {username: '', email: '', password: '', confirm_password: '',
                         passwords_mathes: false}
-        this.handleChange = this.handleChange.bind(this)
-        this.submitForm = this.submitForm.bind(this)
     }
 
     validateForm = () => (

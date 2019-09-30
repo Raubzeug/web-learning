@@ -7,7 +7,6 @@ class PersonalData extends React.Component {
     constructor(props) {
         super(props)
         this.state = {success: '', error: '', errors: [], applied: false}
-        this.submitForm = this.submitForm.bind(this)
     }
 
     submitForm = event => {

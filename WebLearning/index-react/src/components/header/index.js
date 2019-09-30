@@ -1,7 +1,7 @@
 import React from 'react';
-import Logo from './Logo.js'
-import Navigation from './Navigation.js'
-import Search from './Search.js'
+import Logo from '../Logo'
+import Navigation from '../Navigation'
+import Search from '../Search'
 import UserControls from '../user-controls'
 import './header.less'
 

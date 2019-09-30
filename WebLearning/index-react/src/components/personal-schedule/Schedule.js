@@ -13,7 +13,6 @@ class Schedule extends React.Component {
             courses: new Set(),
             selected: '',
         }
-        this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange = ({ target }) => {

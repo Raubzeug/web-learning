@@ -1,6 +1,7 @@
 import React from 'react';
 import RegistrationForm from './RegistrationForm'
 import getCookie from '../../js/getCookie'
+import postRegistrationData from '../../js/postRegistrationData'
 import './registration-content.less'
 import {Link} from 'react-router-dom'
 
@@ -9,16 +10,17 @@ class RegistrationContent extends React.Component {
     constructor(props) {
         super(props)
         this.state = {success: '', error: '', errors: []}
-        this.submitForm = this.submitForm.bind(this)
     }
     
-    submitForm(eventData) {
+    submitForm = (eventData) => {
         this.setState({success: '', error: '', errors: []})
+
         const headers = {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'X-CSRFToken': getCookie('csrftoken'),
             }
+
         fetch('/api/auth/registration/', {
             method: 'POST',
             headers: headers,

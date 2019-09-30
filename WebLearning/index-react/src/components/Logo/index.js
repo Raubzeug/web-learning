@@ -1,14 +1,15 @@
 import React from 'react';
 import Logopic from '../../images/logo.png'
 import { Link } from 'react-router-dom'
+import './logo.less'
 
 const Logo = () => (
     <Link
-    className="header__logo"
+    className="logo"
     to='/'
     title="На главную"
     >
-        <img src={Logopic} alt='logo' />
+        <img className="logo__pic" src={Logopic} alt='logo' />
     </Link>
 )
 

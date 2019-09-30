@@ -5,8 +5,11 @@ from django.urls import path, include
 from graphene_django.views import GraphQLView
 from .schema import schema
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
 
 urlpatterns = [
+    path('', trigger_error),
     path('admin/', admin.site.urls),
     path('api/', include('courses_app.urls')),
     path('api/auth/', include('account_app.urls')),
