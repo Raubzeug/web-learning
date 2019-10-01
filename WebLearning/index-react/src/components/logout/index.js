@@ -1,8 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router'
-import fetchData from '../../js/fetchData'
+import fetchData from '../../services/fetchData'
 import { connect } from 'react-redux'
-import { setLoggedOut } from '../../js/actions/'
+import { setLoggedOut } from '../../redux/actions/'
 
 class Logout extends React.Component {
 

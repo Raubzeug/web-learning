@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router'
 import LoginForm from './LoginForm'
-import fetchData from '../../js/fetchData'
+import fetchData from '../../services/fetchData'
 import './login-content.less'
 import {Link} from 'react-router-dom'
 

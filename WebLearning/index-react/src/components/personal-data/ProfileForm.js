@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Message from '../Message'
 
 import { connect } from 'react-redux'
-import { getUserInfo } from '../../js/actions/'
+import { getUserInfo } from '../../redux/actions/'
 import {Link} from 'react-router-dom'
 
 export class ProfileForm extends React.Component {

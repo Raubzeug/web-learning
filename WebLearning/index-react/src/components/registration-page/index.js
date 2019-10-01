@@ -1,7 +1,7 @@
 import React from 'react';
 import RegistrationForm from './RegistrationForm'
 
-import fetchData from '../../js/fetchData'
+import fetchData from '../../services/fetchData'
 import './registration-content.less'
 import {Link} from 'react-router-dom'
 
