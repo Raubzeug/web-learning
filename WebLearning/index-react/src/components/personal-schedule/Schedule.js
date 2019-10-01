@@ -1,6 +1,6 @@
 import React from 'react'
-import getCookie from '../../js/getCookie'
 import { connect } from "react-redux";
+import fetchData from '../../services/fetchData'
 
 
 class Schedule extends React.Component {
@@ -31,55 +31,38 @@ class Schedule extends React.Component {
 
     componentDidMount = () => {
         this.props.user_info.courses.forEach(course => {
-            fetch(course.slice(22,), {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Token ' + localStorage.token,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken'),
-                    },
-                // credentials: 'include',
+            fetchData(course.slice(22,), undefined, undefined, true)            
+            .then(response => response.json())
+            .then(json => {
+                let tutor = json.tutor
+                let courseTitle = json.title
+
+                this.setState(state => {
+                    const courses = state.courses.add(courseTitle)
+                    return {
+                        courses
+                    }
                 })
-                .then(response => response.json())
-                .then(json => {
-                    let tutor = json.tutor
-                    let courseTitle = json.title
 
-                    this.setState(state => {
-                        const courses = state.courses.add(courseTitle)
-                        return {
-                            courses
-                        }
-                    })
-
-                    json.lessons.forEach(el => {
-                        fetch( el.slice(22,), {
-                            method: 'GET',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json',
-                                'X-CSRFToken': getCookie('csrftoken'),
-                                },
-                            credentials: 'include',
+                json.lessons.forEach(el => {
+                    fetchData(el.slice(22,), undefined, undefined, true)
+                        .then(response => response.json())
+                        .then(json => {
+                            json['tutor'] = tutor
+                            json['course_title'] = courseTitle
+                            this.setState({lesson: json})
+                            this.setState(state => {
+                                const lessons = state.lessons.concat(state.lesson)
+                                lessons.sort((a, b) => a.data > b.data ? 1 : -1)
+                                return {
+                                    lessons,
+                                    lesson: '',
+                                    display: lessons
+                                }
                             })
-                            .then(response => response.json())
-                            .then(json => {
-                                json['tutor'] = tutor
-                                json['course_title'] = courseTitle
-                                this.setState({lesson: json})
-                                this.setState(state => {
-                                    const lessons = state.lessons.concat(state.lesson)
-                                    lessons.sort((a, b) => a.data > b.data ? 1 : -1)
-                                    return {
-                                        lessons,
-                                        lesson: '',
-                                        display: lessons
-                                    }
-                                })
-                            })
-                            .catch(err => console.error(err))
-                    })
+                        })
+                        .catch(err => console.error(err))
+                })
                 })
                 .catch(err => console.error(err))
         })

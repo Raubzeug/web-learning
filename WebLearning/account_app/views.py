@@ -89,7 +89,7 @@ class LogoutView(APIView):
         if serializer.is_valid() and serializer.data['logout'] == True:
             logout(request)
             return Response('Logout successful', status=status.HTTP_200_OK)
-        return Response('No action applied', status=status.HTTP_200_OK)
+        return Response('No action applied', status=status.HTTP_400_BAD_REQUEST )
 
 
 class UserDetailsView(APIView):

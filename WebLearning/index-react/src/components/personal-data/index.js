@@ -1,6 +1,6 @@
 import React from 'react';
 import './personal-data.less'
-import getCookie from '../../js/getCookie'
+import fetchData from '../../services/fetchData'
 import ProfileForm from './ProfileForm'
 
 class PersonalData extends React.Component {
@@ -11,17 +11,7 @@ class PersonalData extends React.Component {
 
     submitForm = event => {
         this.setState({success: '', error: '', errors: [], applied: false})
-        const headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken'),
-            }
-        fetch('/api/auth/user/', {
-            method: 'PUT',
-            headers: headers,
-            credentials: 'include',
-            body: JSON.stringify(event),
-            })
+        fetchData('/api/auth/user/', event, 'PUT', true)
             .then(response => {
                 if (response.status === 200) {
                     this.setState({

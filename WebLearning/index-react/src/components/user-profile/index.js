@@ -3,7 +3,7 @@ import './user-profile.less'
 import PersonalData from '../personal-data'
 import PersonalSchedule from '../personal-schedule'
 import PersonalStatement from '../personal-statement'
-
+import { connect } from 'react-redux'
 
 class UserProfile extends React.Component {
 
@@ -11,8 +11,7 @@ class UserProfile extends React.Component {
         super(props)
         this.state = {
             showPrivat: true,
-            showSchedule: false,
-            is_tutor: localStorage.is_tutor
+            showSchedule: false
         }
     }
 
@@ -40,15 +39,21 @@ class UserProfile extends React.Component {
                         Мой профиль
                     </span>
                     <span className='content__submenu_button' onClick={this.selectSchedule}>
-                        {this.state.is_tutor && 'Ведомость учеников'}
-                        {!this.state.is_tutor && 'Мое расписание'}
+                        {this.props.is_tutor && 'Ведомость учеников'}
+                        {!this.props.is_tutor && 'Мое расписание'}
                     </span>
             </div>
             {this.state.showPrivat && <PersonalData />}
-            {!this.state.is_tutor && this.state.showSchedule && <PersonalSchedule />}
-            {this.state.is_tutor && this.state.showSchedule && <PersonalStatement />}
+            {!this.props.is_tutor && this.state.showSchedule && <PersonalSchedule />}
+            {this.props.is_tutor && this.state.showSchedule && <PersonalStatement />}
         </section>
     )
 }
 
-export default UserProfile
+function mapStateToProps(state) {
+    return {
+      is_tutor: state.is_tutor
+    };
+  }
+
+export default connect(mapStateToProps)(UserProfile)

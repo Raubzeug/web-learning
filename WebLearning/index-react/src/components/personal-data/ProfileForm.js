@@ -18,11 +18,6 @@ export class ProfileForm extends React.Component {
             upd_user_data: false,
             startDate: new Date(1986,8,19),
         }
-
-        this.validateForm = this.validateForm.bind(this)
-        this.handleChange = this.handleChange.bind(this)
-        this.submitForm = this.submitForm.bind(this)
-        this.handleChangeTime = this.handleChangeTime.bind(this)
     }
 
     validateForm = () => (
@@ -32,7 +27,9 @@ export class ProfileForm extends React.Component {
     )
 
     componentDidMount = () => {
-        this.props.getUserInfo()        
+        if (this.props.user_info.length === 0) {
+            this.props.getUserInfo()
+        }        
     }
 
     shouldComponentUpdate = () => {
@@ -83,7 +80,7 @@ export class ProfileForm extends React.Component {
     }
 
     render = () => {
-        if (!this.props.logged_in) {
+        if (!localStorage.logged_in) {
             return <div className='centered-div-padding-10'>You are not logged in!</div>
         }
         else {
@@ -138,10 +135,9 @@ export class ProfileForm extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
-      user_info: state.user_info,
-      logged_in: state.logged_in
+      user_info: state.user_info
     };
   }
 

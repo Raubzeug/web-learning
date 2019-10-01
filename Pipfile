@@ -26,6 +26,7 @@ django-rq = "*"
 rq-scheduler = "*"
 django-cors-headers = "*"
 influxdb = "*"
+sentry-sdk = "==0.12.2"
 
 [requires]
 python_version = "3.7"

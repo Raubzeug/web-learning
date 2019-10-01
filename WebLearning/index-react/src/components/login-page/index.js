@@ -1,11 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router'
 import LoginForm from './LoginForm'
-import getCookie from '../../js/getCookie'
+import fetchData from '../../js/fetchData'
 import './login-content.less'
-
-import { connect } from "react-redux";
-import { setLoggedIn } from '../../js/actions'
 import {Link} from 'react-router-dom'
 
 
@@ -17,24 +14,13 @@ class LoginContent extends React.Component {
     
     submitForm = (eventData) => {
         this.setState({success: '', error: '', errors: []})
-        const headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken'),
-            }
-        fetch('/api/auth/login/', {
-            method: 'POST',
-            headers: headers,
-            credentials: 'include',
-            body: JSON.stringify(eventData),
-            })
+        fetchData('/api/auth/login/', eventData, 'POST')
             .then(response => {
                 return response.json()})
                 .then(data => {
                     if ('token' in data) {
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('logged_in', true);
-                        this.props.setLoggedIn()
                         this.setState({
                             success: 'You are sucessfully logged in!',
                             redirect: true
@@ -87,4 +73,4 @@ class LoginContent extends React.Component {
     )}}
 }
 
-export default connect(null, { setLoggedIn } )(LoginContent)
+export default LoginContent

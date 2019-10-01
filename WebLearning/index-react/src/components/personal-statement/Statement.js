@@ -1,7 +1,7 @@
 import React from 'react'
-import getCookie from '../../js/getCookie'
 import { connect } from "react-redux";
 import Mark from './Mark'
+import fetchData from '../../services/fetchData'
 
 
 class Schedule extends React.Component {
@@ -35,30 +35,12 @@ class Schedule extends React.Component {
         }
 
         this.props.user_info.courses.forEach(course => {
-            fetch(course.slice(22,), {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Token ' + localStorage.token,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken'),
-                    },
-                // credentials: 'include',
-                })
+            fetchData(course.slice(22,), undefined, undefined, true)
                 .then(response => response.json())
                 .then(json => {
                     let courseTitle = json.title
                     json.pupils.forEach(el => {
-                        fetch( el.slice(22,), {
-                            method: 'GET',
-                            headers: {
-                                'Authorization': 'Token ' + localStorage.token,
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json',
-                                'X-CSRFToken': getCookie('csrftoken'),
-                                },
-                            credentials: 'include',
-                            })
+                        fetchData(el.slice(22,), undefined, undefined, true)
                             .then(response => response.json())
                             .then(json => {
                                 json['course_title'] = courseTitle

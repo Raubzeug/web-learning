@@ -1,9 +1,9 @@
-import { SET_LOGGED_IN, USER_INFO_LOADED } from '../constants/action-types'
-import getCookie from '../getCookie'
+import { SET_LOGGED_OUT, USER_INFO_LOADED } from '../constants/action-types'
+import getCookie from '../../services/getCookie'
 
 
-export const setLoggedIn = () => {
-    return {type: SET_LOGGED_IN}
+export const setLoggedOut = () => {
+    return {type: SET_LOGGED_OUT}
 }
 
 
@@ -21,12 +21,6 @@ export const getUserInfo = () => {
             })
             .then(response => response.json())
             .then(json => {
-                if (json.username === 'admin') {
-                    localStorage.setItem('is_tutor',true)
-                }
-                else {
-                    localStorage.setItem('is_turor', false)
-                }
                 dispatch({ type: USER_INFO_LOADED, payload: json })
             })
             .catch(err => console.error(err))

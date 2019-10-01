@@ -1,7 +1,7 @@
 import React from 'react';
 import RegistrationForm from './RegistrationForm'
-import getCookie from '../../js/getCookie'
-import postRegistrationData from '../../js/postRegistrationData'
+
+import fetchData from '../../js/fetchData'
 import './registration-content.less'
 import {Link} from 'react-router-dom'
 
@@ -15,46 +15,39 @@ class RegistrationContent extends React.Component {
     submitForm = (eventData) => {
         this.setState({success: '', error: '', errors: []})
 
-        const headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken'),
+        fetchData(
+            '/api/auth/registration/',
+            eventData,
+            'POST'
+            )
+        .then(response => {
+            if (response.status === 201) {
+                this.setState({success: true})
             }
-
-        fetch('/api/auth/registration/', {
-            method: 'POST',
-            headers: headers,
-            credentials: 'include',
-            body: JSON.stringify(eventData),
-            })
-            .then(response => {
-                if (response.status === 201) {
-                    this.setState({success: true})
-                }
-                else {
-                    this.setState({success: false})
-                }
-                return response.json()})
-                .then(data => {
-                    if (this.state.success) {
-                        this.setState({
-                            success: 'You are sucessfully register! Check your mail for verification link.'
-                        })
-                    }
-                    else {
-                        for (var elem in data) {
-                            this.setState({error: data[elem]})
-                            this.setState(state => {
-                                const errors = state.errors.concat(state.error)
-                                return {
-                                    errors,
-                                    error: ''
-                                }
-                            })
-                        }
-                        }
+            else {
+                this.setState({success: false})
+            }
+            return response.json()})
+        .then(data => {
+            if (this.state.success) {
+                this.setState({
+                    success: 'You are sucessfully register! Check your mail for verification link.'
                 })
-                .catch(err => console.error(err))        
+            }
+            else {
+                for (var elem in data) {
+                    this.setState({error: data[elem]})
+                    this.setState(state => {
+                        const errors = state.errors.concat(state.error)
+                        return {
+                            errors,
+                            error: ''
+                        }
+                    })
+                }
+                }
+        })
+        .catch(err => console.error(err))        
     }
 
     render() {
