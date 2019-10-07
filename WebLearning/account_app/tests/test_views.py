@@ -10,15 +10,6 @@ from ..serializers import UserSerializer, RegistrationSerializer, LoginSerialize
 
 factory = APIRequestFactory()
 
-@pytest.mark.django_db
-def test_verification(table_with_user):
-    user = CustomUser.objects.get(pk=2)
-    assert not user.email_confirmed
-    verification_link = mail.outbox[0].body.split()[-1]
-    response = table_with_user.get(verification_link, follow=True)
-    assert response.status_code == 200
-    user = CustomUser.objects.get(pk=1)
-    assert user.email_confirmed
 
 @pytest.mark.django_db
 def test_view_url_exists_at_desired_location(admin_login):
@@ -43,6 +34,41 @@ def test_user_not_permitted(table_with_user):
 def test_view_url_exists_at_desired_location_registration(table_with_user):
     resp = table_with_user.options('/api/auth/registration/')
     assert resp.status_code == 200
+
+@pytest.mark.django_db
+def test_registration_send_mail():
+    api_client = APIClient()
+    data = {
+        'username': 'test1',
+        'password': '111111',
+        'confirm_password': '111111',
+        'email': 't1@example.com'
+    }
+    response = api_client.post('/api/auth/registration/', json.dumps(data), content_type='application/json')
+    user = CustomUser.objects.get(username=data['username'])
+    verification_link = f'/api/auth/verify/{user.verification_uuid}/'
+    assert len(mail.outbox) == 1
+    assert mail.outbox[0].subject == 'Verify your account'
+    assert mail.outbox[0].to[0] == user.email
+    assert verification_link in mail.outbox[0].body
+
+@pytest.mark.django_db
+def test_verification():
+    api_client=APIClient()
+    data = {
+        'username': 'test1',
+        'password': '111111',
+        'confirm_password': '111111',
+        'email': 't1@example.com'
+    }
+    response = api_client.post('/api/auth/registration/', json.dumps(data), content_type='application/json')
+    user = CustomUser.objects.get(username=data['username'])
+    assert not user.email_confirmed
+    verification_link = mail.outbox[0].body.split()[-1]
+    response = api_client.get(verification_link, follow=True)
+    assert response.status_code == 200
+    user = CustomUser.objects.get(pk=1)
+    assert user.email_confirmed
 
 @pytest.mark.django_db
 def test_registration_valid_data(table_with_user):
@@ -71,6 +97,90 @@ def test_registration_invalid_data_passwords_doesnt_match(table_with_user):
                     'email': 't1@example.com'
                 }
     response = table_with_user.post('/api/auth/registration/', json.dumps(pass_not_match),
+                                content_type='application/json')
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+@pytest.mark.django_db
+def test_registration_invalid_data_no_username(table_with_user):
+    no_username = {
+                    'username': '',
+                    'password': '111111',
+                    'confirm_password': '111111',
+                    'email': 't1@example.com'
+                }
+    response = table_with_user.post('/api/auth/registration/', json.dumps(no_username),
+                                content_type='application/json')
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+@pytest.mark.django_db
+def test_registration_invalid_data_no_password(table_with_user):
+    no_password = {
+                    'username': 'test1',
+                    'password': '',
+                    'confirm_password': '',
+                    'email': 't1@example.com'
+                }
+    response = table_with_user.post('/api/auth/registration/', json.dumps(no_password),
+                                content_type='application/json')
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+@pytest.mark.django_db
+def test_registration_invalid_data_no_email(table_with_user):
+    no_email = {
+                    'username': 'test1',
+                    'password': '111111',
+                    'confirm_password': '111111',
+                    'email': ''
+                }
+    response = table_with_user.post('/api/auth/registration/', json.dumps(no_email),
+                                content_type='application/json')
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+@pytest.mark.django_db
+def test_registration_invalid_data_long_username(table_with_user):
+    long_username = {
+                    'username': 't'*21,
+                    'password': '111111',
+                    'confirm_password': '111111',
+                    'email': 't1@example.com'
+                }
+    response = table_with_user.post('/api/auth/registration/', json.dumps(long_username),
+                                content_type='application/json')
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+@pytest.mark.django_db
+def test_registration_invalid_data_long_password(table_with_user):
+    long_pass = {
+                    'username': 'test1',
+                    'password': '1'*21,
+                    'confirm_password': '1'*21,
+                    'email': 't1@example.com'
+                }
+    response = table_with_user.post('/api/auth/registration/', json.dumps(long_pass),
+                                content_type='application/json')
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+@pytest.mark.django_db
+def test_registration_invalid_data_short_password(table_with_user):
+    short_pass = {
+                    'username': 'test1',
+                    'password': '1'*4,
+                    'confirm_password': '1'*4,
+                    'email': 't1@example.com'
+                }
+    response = table_with_user.post('/api/auth/registration/', json.dumps(short_pass),
+                                content_type='application/json')
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+@pytest.mark.django_db
+def test_registration_invalid_data_long_mail(table_with_user):
+    long_mail = {
+                    'username': 'test1',
+                    'password': '111111',
+                    'confirm_password': '111111',
+                    'email': 't1'*10+'@example.com'
+                }
+    response = table_with_user.post('/api/auth/registration/', json.dumps(long_mail),
                                 content_type='application/json')
     assert response.status_code == status.HTTP_400_BAD_REQUEST
 

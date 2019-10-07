@@ -1,15 +1,16 @@
-import json
-import uuid
+import random
+from redis import ConnectionError as RedisConnectionError
 
-from django.db import models
-
+from django.core.mail import send_mail
+from django.urls import reverse
+from django.template import Template, Context
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
+from django.contrib.sites.shortcuts import get_current_site
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect
-from rest_framework import serializers
 
-from account_app.models import CustomUser as User
+from rest_framework import serializers
 from rest_framework import viewsets, generics, status
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
@@ -17,6 +18,8 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser
 
 from .serializers import UserSerializer, GroupSerializer, RegistrationSerializer, LoginSerializer, LogoutSerializer
+from .models import CustomUser as User
+from .tasks import send_mail_conf
 
 
 def verify(request, uuid, random_digit):
@@ -48,6 +51,40 @@ class GroupViewSet(viewsets.ModelViewSet):
 class RegistrationView(generics.CreateAPIView):
     serializer_class = RegistrationSerializer
 
+    def post(self, request):
+        serializer = RegistrationSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        user=User.objects.get(username=serializer.data.get('username'))
+        sender = 'killedandsaved@mail.ru'
+        reciever = user.email
+        current_site = get_current_site(request)
+        subj = 'Verify your account'
+        random_digit = random.randint(1, 1000000)
+        message = """Follow this link to verify your account: http://{0}{1}""" \
+            .format(current_site,
+                    reverse('verify', kwargs={'uuid': str(user.verification_uuid), 'random_digit': random_digit}))
+
+        html_message = Template("""
+                    <!DOCTYPE html>
+                    <html>
+                        <head>
+                        </head>
+                        <body>
+                            <p>Follow this link to verify your account: 
+                                <a href='http://{{ current_site }}{{ ver_link }}{{ random_digit }}'>verification link</a>
+                            </p>
+                        </body>
+                    </html>
+                    """)
+        c = Context({'current_site': current_site, 'ver_link': reverse('verify', kwargs={'uuid': str(user.verification_uuid),
+                                                           'random_digit': random_digit,
+                                                           })})
+        try:
+            send_mail_conf.delay(sender, reciever, subj, message, html_message=html_message.render(c))
+        except RedisConnectionError:
+            send_mail(subj, message, sender, [reciever], fail_silently=True, html_message=html_message.render(c))
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class LoginView(APIView):
     serializer_class = LoginSerializer

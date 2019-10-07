@@ -27,8 +27,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class RegistrationSerializer(serializers.Serializer):
     username = serializers.CharField(required=True, min_length=3, max_length=20)
-    email = serializers.EmailField(required=True)
-    password = serializers.CharField(required=True, write_only=True, min_length=6)
+    email = serializers.EmailField(required=True, max_length=30)
+    password = serializers.CharField(required=True, write_only=True, min_length=6, max_length=20)
     confirm_password = serializers.CharField(required=True, write_only=True)
 
     def validate(self, data):

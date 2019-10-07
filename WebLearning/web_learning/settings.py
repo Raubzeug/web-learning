@@ -11,13 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-
-sentry_sdk.init(
-    dsn="https://33bd064748ca4bbc839a6a89b4334824@sentry.io/1765860",
-    integrations=[DjangoIntegration()]
-)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,12 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'o8b6_*o$hn3360^$7s(2u^_pw0=ax5v%y#@e9$ap6&qrmc744d'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['example.com']
 INTERNAL_IPS = ['127.0.0.1']
 
 
@@ -63,8 +56,7 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'account_app.CustomUser'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 SITE_ID = 1
 
@@ -195,10 +187,9 @@ REST_FRAMEWORK = {
 # DEFAULT_FROM_EMAIL = ''
 # DEFAULT_TO_EMAIL = ''
 
-RQ_QUEUES = {
-    'default': {
-        'HOST': 'localhost',
-        'PORT': 6379,
-        'DB': 0,
-    }
-}
+
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
