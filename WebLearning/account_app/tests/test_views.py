@@ -45,8 +45,14 @@ def test_registration_send_mail():
         'email': 't1@example.com'
     }
     response = api_client.post('/api/auth/registration/', json.dumps(data), content_type='application/json')
-    user = CustomUser.objects.get(username=data['username'])
-    verification_link = f'/api/auth/verify/{user.verification_uuid}/'
+    try:
+        user = CustomUser.objects.get(username=data['username'])
+    except CustomUser.DoesNotExist:
+        user = None
+    verification_link = ''
+    if user is not None:
+        verification_link = f'/api/auth/verify/{user.verification_uuid}/'
+    assert user is not None
     assert len(mail.outbox) == 1
     assert mail.outbox[0].subject == 'Verify your account'
     assert mail.outbox[0].to[0] == user.email
@@ -62,7 +68,11 @@ def test_verification():
         'email': 't1@example.com'
     }
     response = api_client.post('/api/auth/registration/', json.dumps(data), content_type='application/json')
-    user = CustomUser.objects.get(username=data['username'])
+    try:
+        user = CustomUser.objects.get(username=data['username'])
+    except CustomUser.DoesNotExist:
+        user = None
+    assert user is not None
     assert not user.email_confirmed
     verification_link = mail.outbox[0].body.split()[-1]
     response = api_client.get(verification_link, follow=True)
