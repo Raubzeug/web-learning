@@ -3,7 +3,7 @@ import {
     USER_INFO_LOADED 
 } from '../constants/action-types'
 
-const initialState = {
+export const initialState = {
     user_info: [],
     is_tutor: false
 }

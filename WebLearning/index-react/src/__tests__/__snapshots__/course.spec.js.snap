@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`course component renders properly 1`] = `
+<article
+  className="course"
+>
+  <h1
+    className="course-heading"
+  >
+    mockName
+  </h1>
+  <div
+    className="course-meta"
+  >
+    <div
+      className="course-category"
+    >
+      <span
+        className="course-icon course-tag"
+      >
+        Категория: 
+      </span>
+      <span>
+        mockLang
+      </span>
+    </div>
+  </div>
+  <div
+    className="course-content"
+  >
+    <figure
+      className="course-figure"
+    >
+      <img
+        alt="mockLang"
+        className="course-img"
+        src="mockPic"
+      />
+      <figcaption>
+        <p>
+          mockCap
+        </p>
+      </figcaption>
+    </figure>
+    <a
+      className="course-info-button"
+      href="mockUrl"
+    >
+      Информация о курсе
+    </a>
+  </div>
+</article>
+`;

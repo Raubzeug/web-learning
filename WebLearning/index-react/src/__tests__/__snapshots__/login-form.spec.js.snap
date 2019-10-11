@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login form tests default renders properly 1`] = `
+<form
+  autoComplete="on"
+  className="login-form"
+  method="POST"
+  name="login"
+  onSubmit={[Function]}
+>
+  <label
+    className="login-form__label"
+  >
+    Логин:
+    <input
+      autoFocus={true}
+      className="login-form__input"
+      name="username"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value=""
+    />
+  </label>
+  <label
+    className="login-form__label"
+  >
+    Пароль:
+    <input
+      className="login-form__input"
+      name="password"
+      onChange={[Function]}
+      required={true}
+      type="password"
+      value=""
+    />
+  </label>
+  <div
+    className="login-form__buttons"
+  >
+    <input
+      className="login-form__submit"
+      disabled={true}
+      onClick={[Function]}
+      type="submit"
+      value="Войти"
+    />
+  </div>
+  <Message />
+</form>
+`;

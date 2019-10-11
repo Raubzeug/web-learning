@@ -43,8 +43,8 @@ class LoginForm extends React.Component {
                 value={this.state.password} onChange={this.handleChange} />
             </label>
 
-            <div className="login-form__buttons">
-                <input className='login-form__submit' type="submit" value="Войти"
+            <div className="login-form__buttons" >
+                <input className='login-form__submit' onClick={this.submitForm} type="submit" value="Войти"
                 disabled={!this.validateForm()} />
             </div>
             <Message success={this.props.success} errors={this.props.errors}/>

@@ -5,7 +5,7 @@ import PersonalSchedule from '../personal-schedule'
 import PersonalStatement from '../personal-statement'
 import { connect } from 'react-redux'
 
-class UserProfile extends React.Component {
+export class UserProfile extends React.Component {
 
     constructor(props) {
         super(props)
@@ -15,19 +15,27 @@ class UserProfile extends React.Component {
         }
     }
 
+    toggle = () => {
+        this.setState((state) => ({
+                    showPrivat: !this.state.showPrivat,
+                    showSchedule: !this.state.showSchedule
+                })
+        )
+    }
+
     selectPrivat = () => {
-        !this.state.showPrivat && this.setState({
-            showPrivat: !this.state.showPrivat,
-            showSchedule: !this.state.showSchedule
-        })
+         this.setState({
+                showPrivat: true,
+                showSchedule: false
+            })
     }
 
     selectSchedule = () => {
-        !this.state.showSchedule && this.setState({
-            showSchedule: !this.state.showSchedule,
-            showPrivat: !this.state.showPrivat     
-        })
-    }
+        this.setState({
+                showPrivat: false,
+                showSchedule: true
+            })
+   }
 
     render = () => (
         <section className="content">

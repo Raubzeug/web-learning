@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserControls test should render properly NOT logged_in 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <UserControls>
+      <div>
+        <Link
+          className="register-login"
+          title="Регистрация"
+          to="/registration"
+        >
+          <a
+            className="register-login"
+            href="/registration"
+            onClick={[Function]}
+            title="Регистрация"
+          >
+            <img
+              alt="registration"
+              src="registration.png"
+            />
+            Регистрация
+          </a>
+        </Link>
+        <Link
+          className="register-login"
+          title="Войти"
+          to="/login"
+        >
+          <a
+            className="register-login"
+            href="/login"
+            onClick={[Function]}
+            title="Войти"
+          >
+            <img
+              alt="login"
+              src="login.png"
+            />
+            Войти
+          </a>
+        </Link>
+      </div>
+    </UserControls>
+  </Router>
+</BrowserRouter>
+`;
+
+exports[`UserControls test should render properly logged_in 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <UserControls>
+      <div>
+        <Link
+          className="register-login"
+          title="Личный кабинет"
+          to="/profile"
+        >
+          <a
+            className="register-login"
+            href="/profile"
+            onClick={[Function]}
+            title="Личный кабинет"
+          >
+            <img
+              alt="profile"
+              src="registration.png"
+            />
+            Личный кабинет
+          </a>
+        </Link>
+        <Link
+          className="register-login"
+          title="Выйти"
+          to="/logout"
+        >
+          <a
+            className="register-login"
+            href="/logout"
+            onClick={[Function]}
+            title="Выйти"
+          >
+            <img
+              alt="logout"
+              src="login.png"
+            />
+            Выйти
+          </a>
+        </Link>
+      </div>
+    </UserControls>
+  </Router>
+</BrowserRouter>
+`;

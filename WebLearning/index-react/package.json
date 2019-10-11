@@ -31,7 +31,6 @@
     "html-webpack-plugin": "4.0.0-beta.5",
     "identity-obj-proxy": "3.0.0",
     "is-wsl": "^1.1.0",
-    "jest": "24.8.0",
     "jest-environment-jsdom-fourteen": "0.1.0",
     "jest-resolve": "24.8.0",
     "jest-watch-typeahead": "0.3.1",
@@ -69,7 +68,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "jest",
+    "test2": "node scripts/test.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -97,7 +97,9 @@
     "setupFiles": [
       "react-app-polyfill/jsdom"
     ],
-    "setupFilesAfterEnv": [],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
@@ -140,8 +142,16 @@
     ]
   },
   "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.2",
+    "fetch-mock": "^7.5.1",
+    "jest": "^24.8.0",
+    "node-fetch": "^2.6.0",
     "react-redux": "^7.1.1",
+    "react-test-renderer": "^16.10.2",
     "redux": "^4.0.4",
+    "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0"
   }
 }

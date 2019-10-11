@@ -3,7 +3,7 @@ import './user-controls.less'
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
 
-class UserControls extends React.Component {
+export class UserControls extends React.Component {
 
     render = () => 
         { if (localStorage.logged_in === 'true') { 

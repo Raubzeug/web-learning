@@ -7,6 +7,7 @@ class Schedule extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            loading: true,
             lessons: [],
             lesson: '',
             display: [],
@@ -30,6 +31,9 @@ class Schedule extends React.Component {
     }
 
     componentDidMount = () => {
+        if (!this.props.user_info.courses) {
+            return
+        }
         this.props.user_info.courses.forEach(course => {
             fetchData(course.slice(22,), undefined, undefined, true)            
             .then(response => response.json())
@@ -69,8 +73,11 @@ class Schedule extends React.Component {
             
     }
 
-    render = () => (
-        <div>
+    render = () => {
+        if (this.state.loading) {
+            return <div>Loading...</div>
+        }
+        return <div>
         <select className="schedule-filter" onChange={this.handleChange}>
             <option value="all">Все курсы</option>
             {Array.from(this.state.courses).map(el => <option value={el} key={el}>{el}</option>)}
@@ -97,7 +104,7 @@ class Schedule extends React.Component {
             </tbody>
         </table>
         </div>
-    )
+    }
 
 }
 
