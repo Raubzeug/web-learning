@@ -21,14 +21,6 @@ class RegistrationContent extends React.Component {
             'POST'
             )
         .then(handleErrors)
-        // .then(response => {
-        //     if (response.status === 201) {
-        //         this.setState({success: true})
-        //     }
-        //     else {
-        //         this.setState({success: false})
-        //     }
-        //     return response.json()})
         .then(data => {
             this.setState({
                 success: 'You are sucessfully register! Check your mail for verification link.'
