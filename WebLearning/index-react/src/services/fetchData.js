@@ -1,5 +1,14 @@
 import getCookie from './getCookie'
 
+export const handleErrors = (response) => {
+    if (!response.ok) {
+        let err = new Error(response.statusText || response.status)
+        err.response = response
+        throw err;
+    }
+    return response.json();
+}
+
 const fetchData = (url, data='', method='GET', authenticated=false) => {
     const headers = {
         'Content-Type': 'application/json',

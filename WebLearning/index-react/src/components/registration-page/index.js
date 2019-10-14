@@ -1,7 +1,7 @@
 import React from 'react';
 import RegistrationForm from './RegistrationForm'
 
-import fetchData from '../../services/fetchData'
+import fetchData, {handleErrors} from '../../services/fetchData'
 import './registration-content.less'
 import {Link} from 'react-router-dom'
 
@@ -20,22 +20,28 @@ class RegistrationContent extends React.Component {
             eventData,
             'POST'
             )
-        .then(response => {
-            if (response.status === 201) {
-                this.setState({success: true})
-            }
-            else {
-                this.setState({success: false})
-            }
-            return response.json()})
+        .then(handleErrors)
+        // .then(response => {
+        //     if (response.status === 201) {
+        //         this.setState({success: true})
+        //     }
+        //     else {
+        //         this.setState({success: false})
+        //     }
+        //     return response.json()})
         .then(data => {
-            if (this.state.success) {
-                this.setState({
-                    success: 'You are sucessfully register! Check your mail for verification link.'
-                })
-            }
-            else {
-                for (var elem in data) {
+            this.setState({
+                success: 'You are sucessfully register! Check your mail for verification link.'
+            })
+
+        })
+        .catch(err => {
+            console.error(err)
+            return err.response.json()
+        })
+        .then(data => {
+            if (data) {
+                for (let elem in data) {
                     this.setState({error: data[elem]})
                     this.setState(state => {
                         const errors = state.errors.concat(state.error)
@@ -45,9 +51,8 @@ class RegistrationContent extends React.Component {
                         }
                     })
                 }
-                }
-        })
-        .catch(err => console.error(err))        
+            }
+        })        
     }
 
     render() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router'
 import LoginForm from './LoginForm'
-import fetchData from '../../services/fetchData'
+import fetchData, { handleErrors } from '../../services/fetchData'
 import './login-content.less'
 import {Link} from 'react-router-dom'
 
@@ -15,32 +15,36 @@ class LoginContent extends React.Component {
     submitForm = (eventData) => {
         this.setState({success: '', error: '', errors: []})
         fetchData('/api/auth/login/', eventData, 'POST')
-            .then(response => {
-                return response.json()})
-                .then(data => {
-                    if ('token' in data) {
-                        localStorage.setItem('token', data.token);
-                        localStorage.setItem('logged_in', true);
-                        this.setState({
-                            success: 'You are sucessfully logged in!',
-                            redirect: true
+            .then(handleErrors)
+            .then(data => {
+                localStorage.setItem('logged_in', false);
+                if ('token' in data) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('logged_in', true);
+                    this.setState({
+                        success: 'You are sucessfully logged in!',
+                        redirect: true
+                    })
+                }
+            })
+            .catch(err => {
+                console.error(err)
+                return err.response.json()
+            })
+            .then(data => {
+                if (data) {
+                    for (let elem in data) {
+                        this.setState({error: data[elem]})
+                        this.setState(state => {
+                            const errors = state.errors.concat(state.error)
+                            return {
+                                errors,
+                                error: ''
+                            }
                         })
                     }
-                    else {
-                        localStorage.setItem('logged_in', false);
-                        for (var elem in data) {
-                            this.setState({error: data[elem]})
-                            this.setState(state => {
-                                const errors = state.errors.concat(state.error)
-                                return {
-                                    errors,
-                                    error: ''
-                                }
-                            })
-                        }
-                        }
-                })
-                .catch(err => console.error(err))        
+                    }
+                })        
     }
 
     render = () => {
