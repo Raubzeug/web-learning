@@ -19,10 +19,10 @@ class App extends React.Component {
       <Header />
       <Switch>
         <Route exact path="/" component={IndexContent} />
-        <Route exact path="/login" component={LoginContent} />
-        <Route exact path="/logout" component={Logout} />
-        <Route exact path="/registration" component={RegistrationContent} />
-        <Route exact path="/profile" component={UserProfile} />
+        <Route path="/login" component={LoginContent} />
+        <Route path="/logout" component={Logout} />
+        <Route path="/registration" component={RegistrationContent} />
+        <Route path="/profile" component={UserProfile} />
       </Switch>
       <Footer />
     </div>
