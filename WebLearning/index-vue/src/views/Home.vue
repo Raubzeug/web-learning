@@ -3,15 +3,11 @@
     <About />
     <section class="content">
       <div class="content__column">
-        <div class="content__header" id="anchore1">
-          Популярные курсы
-        </div>
+        <div class="content__header" id="anchore1">Популярные курсы</div>
         <Courses v-bind:courses="courses" />
       </div>
       <div class="content__line background-light">
-        <div class="content__header" id="anchore2">
-          Отзывы наших студентов
-        </div>
+        <div class="content__header" id="anchore2">Отзывы наших студентов</div>
         <Review
           v-for="review in reviews"
           v-bind:review="review"
@@ -19,9 +15,7 @@
         />
       </div>
       <div class="content__line">
-        <div class="content__header" id="anchore3">
-          Наши партнеры
-        </div>
+        <div class="content__header" id="anchore3">Наши партнеры</div>
         <Partner
           v-for="partner in partners"
           v-bind:partner="partner"
@@ -29,9 +23,7 @@
         />
       </div>
       <div class="content__line background-light">
-        <div class="content__header" id="anchore4">
-          Оставьте отзыв
-        </div>
+        <div class="content__header" id="anchore4">Оставьте отзыв</div>
         <FeedbackForm @add:feedback="addFeedback" />
       </div>
     </section>
@@ -136,6 +128,7 @@ export default {
 
 .content {
   .flex-column;
+  text-align: center;
 
   margin-bottom: 40px;
 
@@ -146,6 +139,7 @@ export default {
 
   &__line {
     .flex-wrap;
+    justify-content: center;
   }
 
   &__header {

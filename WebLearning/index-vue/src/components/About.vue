@@ -2,10 +2,10 @@
   <div class="about">
     <Logo />
     <div class="about__description">
-      <b
-        >This is Foxy's learning portal landing page as a first attempt of using
-        Vue.js!</b
-      >
+      <b>
+        This is Foxy's learning portal landing page as a first attempt of using
+        Vue.js!
+      </b>
     </div>
   </div>
 </template>

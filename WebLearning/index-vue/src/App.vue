@@ -1,7 +1,7 @@
 <template>
   <div class="body-wrapper">
     <div class="router_navigation">
-      <router-link class="router_link" to="/">Home</router-link> |
+      <router-link class="router_link" to="/">Home</router-link>|
       <router-link class="router_link" to="/#anchore1">Courses</router-link>
     </div>
     <router-view />
@@ -27,7 +27,7 @@ body {
 
 .router_navigation {
   background: #ffffff;
-  text-align: left;
+  text-align: center;
   margin: 10px 0;
   position: sticky;
   top: 0;

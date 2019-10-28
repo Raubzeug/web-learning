@@ -4,24 +4,18 @@
       <h1 class="course-heading">{{ course.name }}</h1>
       <div class="course-meta">
         <div class="course-category">
-          <span class="course-icon course-tag">Категория: </span>
+          <span class="course-icon course-tag">Категория:</span>
           <span>{{ course.lang }}</span>
         </div>
       </div>
       <div class="course-content">
         <figure class="course-figure">
-          <img
-            class="course-img"
-            v-bind:src="course.img"
-            v-bind:alt="course.lang"
-          />
+          <img class="course-img" v-bind:src="course.img" v-bind:alt="course.lang" />
           <figcaption>
             <p>{{ course.caption }}</p>
           </figcaption>
         </figure>
-        <a class="course-info-button" v-bind:href="course.url">
-          Информация о курсе
-        </a>
+        <a class="course-info-button" v-bind:href="course.url">Информация о курсе</a>
       </div>
     </article>
   </div>
@@ -51,6 +45,10 @@ export default {
   flex-basis: 300px;
   max-width: 400px;
   flex-grow: 1;
+
+  &-heading {
+    text-align: left;
+  }
 
   &-meta {
     display: flex;
