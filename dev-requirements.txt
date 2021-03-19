@@ -1,7 +1,7 @@
--i https://pypi.org/simple
+-i https://pypi.org/simple/
 aniso8601==7.0.0
-atomicwrites==1.3.0
-attrs==19.3.0
+atomicwrites==1.4.0
+attrs==20.3.0
 certifi==2019.9.11
 chardet==3.0.4
 coreapi==2.3.3
@@ -11,24 +11,24 @@ django-debug-toolbar==2.0
 django-graphiql-debug-toolbar==0.1.4
 django-rest-swagger==2.2.0
 django==2.2.5
-djangorestframework==3.10.3
+djangorestframework==3.11.2
 faker==2.0.3
 graphene-django==2.6.0
 graphene==2.1.8
 graphql-core==2.2.1
 graphql-relay==2.0.0
 idna==2.8
-importlib-metadata==0.23 ; python_version < '3.8'
-itypes==1.1.0
-jinja2==2.10.3
+importlib-metadata==3.7.3 ; python_version < '3.8'
+itypes==1.2.0
+jinja2==2.11.3
 markupsafe==1.1.1
-more-itertools==7.2.0
+more-itertools==8.7.0
 openapi-codec==1.3.2
-packaging==19.2
-pluggy==0.13.0
+packaging==20.9
+pluggy==0.13.1
 promise==2.2.1
-py==1.8.0
-pyparsing==2.4.2
+py==1.10.0
+pyparsing==2.4.7
 pytest-cov==2.8.1
 pytest-django==3.6.0
 pytest==5.2.1
@@ -36,12 +36,13 @@ python-dateutil==2.8.0
 pytz==2019.2
 requests==2.22.0
 rx==1.6.1
-simplejson==3.16.0
+simplejson==3.17.2
 singledispatch==3.4.0.3
 six==1.12.0
 sqlparse==0.3.0
 text-unidecode==1.3
-uritemplate==3.0.0
+typing-extensions==3.7.4.3 ; python_version < '3.8'
+uritemplate==3.0.1
 urllib3==1.25.6
-wcwidth==0.1.7
-zipp==0.6.0
+wcwidth==0.2.5
+zipp==3.4.1
