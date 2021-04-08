@@ -15,7 +15,7 @@ pytest = "*"
 pytest-cov = "*"
 
 [packages]
-django = "==2.2.5"
+django = "==2.2.20"
 django-rest-auth = "==0.9.5"
 django-allauth = "==0.40.0"
 graphene-django = "==2.6.0"
